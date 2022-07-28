@@ -7,12 +7,17 @@ import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {LayoutModule} from '@angular/cdk/layout';
 
-const materialComponents = [MatSliderModule,MatToolbarModule,MatSidenavModule,MatButtonModule,MatListModule,MatIconModule,LayoutModule]
+const materialComponents = [
+  MatSliderModule,
+  MatToolbarModule,
+  MatSidenavModule,
+  MatButtonModule,
+  MatListModule,
+  MatIconModule,
+  LayoutModule]
+  
 @NgModule({
-  declarations: [],
-  imports: [
-    materialComponents
-  ],
+  imports: [materialComponents],
   exports:[materialComponents]
 })
 export class MaterialModule { }
