@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppRoutingModule } from '../app-routing.module';
-import { RoutePaths } from '../enums/route-paths';
-import { SharedModule } from '../shared/shared.module';
-import { LoginComponent } from './login.component';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { RoutePaths } from 'src/app/enums/route-paths';
+import { SharedModule } from 'src/app/shared/shared.module';
 
-describe('LoginComponent', () => {
-  let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
+import { RegistrationComponent } from './registration.component';
+
+describe('RegistrationComponent', () => {
+  let component: RegistrationComponent;
+  let fixture: ComponentFixture<RegistrationComponent>;
   let router: jasmine.SpyObj<Router>;
 
   beforeEach(() => {
@@ -20,6 +20,7 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      declarations: [ RegistrationComponent ],
       imports: [
         RouterTestingModule,
         BrowserModule,
@@ -27,15 +28,15 @@ describe('LoginComponent', () => {
         BrowserAnimationsModule,
         SharedModule,
       ],
-      declarations: [LoginComponent],
       providers: [
         { provide: Router, useValue: router }
-      ],
-    }).compileComponents();
+      ]
+    })
+    .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoginComponent);
+    fixture = TestBed.createComponent(RegistrationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -52,16 +53,11 @@ describe('LoginComponent', () => {
     });
   });
 
-  xdescribe('buildForm', () => {
-    it('it should ', () => {});
-  });
-
-  xdescribe('onSubmit', () => {});
-
-  describe('registerUser', () => {
-    it('it should navigate to registration page when click on "Create new accout?"', () => {
-      component.registerUser();
-      expect(router.navigate).toHaveBeenCalledWith([RoutePaths.REGISTRATION]);
+  describe('redirectToLogIn', () => {
+    it('it should navigate to login page when click on "Have an Account?"', () => {
+      component.redirectToLogIn();
+      expect(router.navigate).toHaveBeenCalledWith([RoutePaths.LOGIN]);
     });
   });
+
 });

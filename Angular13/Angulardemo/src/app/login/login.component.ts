@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { RoutePaths } from 'src/app/enums/route-paths';
 
 @Component({
   selector: 'app-login',
@@ -10,18 +12,27 @@ export class LoginComponent implements OnInit {
   loginform!: FormGroup;
 
   constructor(
-    private fb: FormBuilder,
-  ) {}
+    private router: Router
+    ) {}
 
   ngOnInit() {
-    this.loginform = this.fb.group({
-      userName: ['', Validators.required],
-      password: ['', Validators.required]
-    });
+    this.buildForm();
   }
 
+  buildForm() {
+    this.loginform = new FormGroup({
+      email: new FormControl('',Validators.email),
+      password: new FormControl('',Validators.required)
+    })
+  }
 
   onSubmit() {
-    console.log('form submit')
+    console.log(this.loginform.value);
   }
+
+  registerUser() {
+    this.router.navigate([RoutePaths.REGISTRATION]);
+    console.log('navigate to registration page')
+  }
+
 }

@@ -25,3 +25,10 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## CLI CMD 
+
+1. Lazy loading module - ng generate module [name] --route [name] --module app.module
+2. Enums - ng generate enum [name]
+3. component - ng g c [name]
+4. module- ng g m [name]
