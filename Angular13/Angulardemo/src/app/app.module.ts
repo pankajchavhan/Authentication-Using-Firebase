@@ -14,8 +14,12 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+<<<<<<< Updated upstream
 import { HttpClientModule } from '@angular/common/http';
 
+=======
+import { FlexLayoutModule } from "@angular/flex-layout";
+>>>>>>> Stashed changes
 
 @NgModule({
   declarations: [
@@ -32,7 +36,8 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
