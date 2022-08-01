@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angular-13-a52f9": {
+      "hosting": {
+        "Angulardemo": [
+          "angular-13-a52f9"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angular-13-a52f9"
+  }
+}

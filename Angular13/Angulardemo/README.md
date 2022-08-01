@@ -32,3 +32,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 2. Enums - ng generate enum [name]
 3. component - ng g c [name]
 4. module- ng g m [name]
+
+## Firebase
+ng add @angular/fire 
+1. Install ng deploy -- hosting, Authentication, Firestoreng 
