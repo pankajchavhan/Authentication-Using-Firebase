@@ -1,1 +1,51 @@
-<p>login works!</p>
+<div class="body-color">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+             <div class="signin-content">
+                 <mat-card>
+                   <mat-card-content>
+                     <form [formGroup]="loginform" (ngSubmit)="onSubmit()">
+                       <h1 class="fw-bold">Login</h1>
+                       <mat-form-field class="full-width-input">
+                         <mat-icon matPrefix>account_circle</mat-icon>
+                         <input matInput 
+                             placeholder="Email" 
+                             formControlName="email">
+                         <!-- <mat-error *ngIf="isFieldInvalid('userName')">
+                           Please inform your user name
+                         </mat-error> -->
+                       </mat-form-field>
+                       <mat-form-field class="full-width-input">
+                         <mat-icon matPrefix>lock</mat-icon> 
+                         <input matInput 
+                            type="password" 
+                            placeholder="Password" 
+                            formControlName="password" >
+                         <!-- <mat-error *ngIf="isFieldInvalid('userName')">
+                           Please inform your password
+                         </mat-error> -->
+                       </mat-form-field><br><br>
+                       <button class="full-width-input" 
+                       mat-raised-button 
+                          color="primary"
+                          type="submit"
+                          [disabled]="loginform.invalid">
+                               LOG IN
+                       </button>
+                     </form><br>
+                       <button class="create-new-account-btn"
+                          (click)="registerUser()"
+                          type="button">
+                               Create new account?
+                       </button>
+                   </mat-card-content>
+                 </mat-card>
+               </div>
+            </div>
+        </div>
+     </div>
+</div>
+
+
+
