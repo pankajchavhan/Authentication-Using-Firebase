@@ -32,7 +32,12 @@ export class LoginComponent implements OnInit {
     if (this.loginform.invalid) {
       return;
     }
-    this.authService.signIn(this.loginform.value).subscribe((res:any)=>{console.log(res);});
+    this.authService.signIn(this.loginform.value).subscribe((res:any)=>{
+      console.log(res);
+      console.log(this.loginform.get('email'));
+      console.log(this.loginform.get('password'));
+      this.router.navigate([RoutePaths.LANDING_PAGE])
+    });
     //console.log(this.loginform.value);
   }
 
@@ -41,4 +46,12 @@ export class LoginComponent implements OnInit {
     console.log('navigate to registration page')
   }
 
+  getErrorMessage(){
+
+  }
+
+  get form(){
+    console.log(this.loginform.get('email'));
+    return this.loginform.get('email');
+  }
 }
