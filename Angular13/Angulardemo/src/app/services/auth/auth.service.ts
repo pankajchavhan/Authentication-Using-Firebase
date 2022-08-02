@@ -16,7 +16,7 @@ export class AuthService {
       password: payload.password,
       returnSecureToken: true,
     };
-    return this.http.post<SignUpResponse>(environment.signUpBaseUrl, reqPayload);
+    return this.http.post<SignUpResponse>(environment.signUpApi, reqPayload);
   }
 
   signIn(payload: SignInRequest): Observable<SignInResponse> {
@@ -25,6 +25,6 @@ export class AuthService {
       password: payload.password,
       returnSecureToken: true,
     };
-    return this.http.post<SignInResponse>(environment.signInBaseUrl,reqPayload);
+    return this.http.post<SignInResponse>(environment.signInApi,reqPayload);
   }
 }

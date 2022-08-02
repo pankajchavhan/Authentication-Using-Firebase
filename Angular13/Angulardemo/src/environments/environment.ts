@@ -6,8 +6,8 @@ export const environment = {
   production: false,
 
   // firebase auth api
-  signUpBaseUrl: 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB_gepdS1dZuxZAGu6R2_Qb0wUpJDUOh94',
-  signInBaseUrl: 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyB_gepdS1dZuxZAGu6R2_Qb0wUpJDUOh94',
+  signUpApi: 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB_gepdS1dZuxZAGu6R2_Qb0wUpJDUOh94',
+  signInApi: 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyB_gepdS1dZuxZAGu6R2_Qb0wUpJDUOh94',
   
 
   //firebase setup code
