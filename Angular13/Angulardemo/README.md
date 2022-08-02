@@ -27,12 +27,30 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
 ## CLI CMD 
-
 1. Lazy loading module - ng generate module [name] --route [name] --module app.module
 2. Enums - ng generate enum [name]
 3. component - ng g c [name]
 4. module- ng g m [name]
+5. interface- ng g i [name]
 
 ## Firebase
 ng add @angular/fire 
 1. Install ng deploy -- hosting, Authentication, Firestoreng 
+2. video link for firebase connection with Angular- https://www.youtube.com/watch?v=O0uVYhRE850
+3. video link for how to configure firebase auth api url- https://www.youtube.com/watch?v=NW1nixqRPS0&list=PLLhsXdvz0qjJHtgs1b7nyue6GDcSXfJNA&index=6
+
+## GIT CMD
+1. Create new branch - "git checkout -b [name] "
+2. Switch from one branch to another - " git checkout [name] "
+3. pull from master- "git pull upstream master"
+4. push your changes- "git push origin [name] " (here name is the name of branch which you want to push)
+4. "git stash"
+5. "git stash pop"
+6. "git add ."
+7. "git commit -m "message"
+
+# CONFLICTS OPTIONS
+1. Accept current changes- 
+2. Accept Incomming changes-
+3. Accept both changes-
+4. compare changes- 

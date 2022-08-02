@@ -4,6 +4,13 @@
 
 export const environment = {
   production: false,
+
+  // firebase auth api
+  signUpApi: 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB_gepdS1dZuxZAGu6R2_Qb0wUpJDUOh94',
+  signInApi: 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyB_gepdS1dZuxZAGu6R2_Qb0wUpJDUOh94',
+  
+
+  //firebase setup code
   firebase: {
     projectId: 'angular-13-a52f9',
     appId: '1:928442183745:web:2dc9f5e094fc97fcd296c0',
@@ -12,8 +19,7 @@ export const environment = {
     apiKey: 'AIzaSyB_gepdS1dZuxZAGu6R2_Qb0wUpJDUOh94',
     authDomain: 'angular-13-a52f9.firebaseapp.com',
     messagingSenderId: '928442183745',
-  }
-  
+  },
 };
 
 /*
