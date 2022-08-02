@@ -1,57 +1,50 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RoutePaths } from 'src/app/enums/route-paths';
+import { SignInRequest, SignInResponse } from '../interface/auth.model';
 import { AuthService } from '../services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   loginform!: FormGroup;
 
-  constructor(
-    private router: Router,
-    private authService: AuthService
-    ) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.buildForm();
   }
 
-  buildForm() {
+  buildForm(): void {
     this.loginform = new FormGroup({
-      email: new FormControl('',Validators.email),
-      password: new FormControl('',Validators.required)
-    })
+      email: new FormControl('', Validators.email),
+      password: new FormControl('', Validators.required),
+    });
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.loginform.invalid) {
       return;
     }
-    this.authService.signIn(this.loginform.value).subscribe((res:any)=>{
-      console.log(res);
-      console.log(this.loginform.get('email'));
-      console.log(this.loginform.get('password'));
-      this.router.navigate([RoutePaths.LANDING_PAGE])
+    const payload: SignInRequest = {
+      email: this.loginform.value.email,
+      password: this.loginform.value.password,
+    };
+
+    this.authService.signIn(payload).subscribe((res: SignInResponse) => {
+      this.router.navigate([RoutePaths.LANDING_PAGE]);
     });
-    //console.log(this.loginform.value);
   }
 
-  registerUser() {
+  registerUser(): void {
     this.router.navigate([RoutePaths.REGISTRATION]);
-    console.log('navigate to registration page')
   }
 
-  getErrorMessage(){
-
-  }
-
-  get form(){
-    console.log(this.loginform.get('email'));
+  get form() {
     return this.loginform.get('email');
   }
 }
