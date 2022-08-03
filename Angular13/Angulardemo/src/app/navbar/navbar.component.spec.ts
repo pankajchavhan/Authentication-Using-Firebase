@@ -4,16 +4,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppRoutingModule } from '../app-routing.module';
+import { RoutePaths } from '../enums/route-paths';
+import { AuthService } from '../services/auth/auth.service';
 import { SharedModule } from '../shared/shared.module';
 import { NavbarComponent } from './navbar.component';
 
-describe('LoginComponent', () => {
+describe('NavbarComponent', () => {
   let component: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
-  let router: jasmine.SpyObj<Router>;
-
+  let routerSpy: jasmine.SpyObj<Router>;
+  let authServiceSpy:jasmine.SpyObj<AuthService>;
+  
   beforeEach(() => {
-    router = jasmine.createSpyObj('Router', ['navigate']);
+    routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+    authServiceSpy = jasmine.createSpyObj('AuthService', ['isUser$']);
   });
 
   beforeEach(async () => {
@@ -27,7 +31,8 @@ describe('LoginComponent', () => {
       ],
       declarations: [NavbarComponent],
       providers: [
-        { provide: Router, useValue: router }
+        { provide: Router, useValue: routerSpy },
+        {provide: AuthService, useValue: authServiceSpy }
       ],
     }).compileComponents();
   });
@@ -45,6 +50,21 @@ describe('LoginComponent', () => {
   describe('ngOnInit', () => {
     it('', () => {
       component.ngOnInit();
+    });
+  });
+
+  describe('login', () => {
+    it('it should navigate to login page when click on login button', () => {
+      component.login();
+      expect(routerSpy.navigate).toHaveBeenCalledWith([RoutePaths.LOGIN]);
+    });
+  });
+
+  describe('logout', () => {
+    it('it should navigate to registration page when click on logout button', () => {
+      component.logout();
+      expect(authServiceSpy.signOut).toHaveBeenCalled();
+      expect(routerSpy.navigate).toHaveBeenCalledWith([RoutePaths.LOGIN]);
     });
   });
 
