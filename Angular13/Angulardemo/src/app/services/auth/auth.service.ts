@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { SignInRequest, SignInResponse, SignUpRequest, SignUpResponse} from 'src/app/interface/auth.model';
 import { environment } from 'src/environments/environment';
 
@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
+  isUser$ = new Subject<boolean>();
   constructor(private http: HttpClient) {}
 
   signUp(payload: SignUpRequest): Observable<SignUpResponse> {
@@ -26,5 +27,9 @@ export class AuthService {
       returnSecureToken: true,
     };
     return this.http.post<SignInResponse>(environment.signInApi,reqPayload);
+  }
+
+  signOut(){
+    this.isUser$.next(false);
   }
 }

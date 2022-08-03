@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { RoutePaths } from '../enums/route-paths';
+import { AuthService } from '../services/auth/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,10 +10,11 @@ import { RoutePaths } from '../enums/route-paths';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-
-  constructor(private router: Router,) { }
+  isUser!:Observable<boolean>;
+  constructor(private router: Router,private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.isUser=this.authService.isUser$;
   }
 
   login() {
@@ -19,4 +22,8 @@ export class NavbarComponent implements OnInit {
     console.log('navigate to login page')
   }
 
+  logout(){
+    this.authService.signOut();
+    this.router.navigate([RoutePaths.LOGIN]);
+  }
 }

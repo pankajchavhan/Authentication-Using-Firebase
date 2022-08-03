@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
@@ -8,14 +9,17 @@ import { AppRoutingModule } from '../app-routing.module';
 import { RoutePaths } from '../enums/route-paths';
 import { SharedModule } from '../shared/shared.module';
 import { LoginComponent } from './login.component';
+import { AuthService } from '../services/auth/auth.service';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let router: jasmine.SpyObj<Router>;
-
+  let authService:jasmine.SpyObj<AuthService>;
+  
   beforeEach(() => {
     router = jasmine.createSpyObj('Router', ['navigate']);
+    authService = jasmine.createSpyObj('AuthService', ['signIn','isUser$']);
   });
 
   beforeEach(async () => {
@@ -29,7 +33,9 @@ describe('LoginComponent', () => {
       ],
       declarations: [LoginComponent],
       providers: [
-        { provide: Router, useValue: router }
+        { provide: Router, useValue: router },
+        HttpClientModule,
+        {provide: AuthService, useValue: authService }
       ],
     }).compileComponents();
   });
@@ -56,7 +62,13 @@ describe('LoginComponent', () => {
     it('it should ', () => {});
   });
 
-  xdescribe('onSubmit', () => {});
+  xdescribe('onSubmit', () => {
+    it('it should navigate to registration page when click on "Create new accout?"', () => {
+      component.registerUser();
+      expect(authService.isUser$).toBeTrue();
+      expect(router.navigate).toHaveBeenCalledWith([RoutePaths.LANDING_PAGE]);
+    });
+  });
 
   describe('registerUser', () => {
     it('it should navigate to registration page when click on "Create new accout?"', () => {
