@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
@@ -8,14 +8,17 @@ import { AppRoutingModule } from '../app-routing.module';
 import { RoutePaths } from '../enums/route-paths';
 import { SharedModule } from '../shared/shared.module';
 import { LoginComponent } from './login.component';
+import { AuthService } from '../services/auth/auth.service';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
-  let router: jasmine.SpyObj<Router>;
-
+  let routerSpy: jasmine.SpyObj<Router>;
+  let authServiceSpy:jasmine.SpyObj<AuthService>;
+  
   beforeEach(() => {
-    router = jasmine.createSpyObj('Router', ['navigate']);
+    routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+    authServiceSpy = jasmine.createSpyObj('AuthService', ['signIn','isUser$']);
   });
 
   beforeEach(async () => {
@@ -26,10 +29,12 @@ describe('LoginComponent', () => {
         AppRoutingModule,
         BrowserAnimationsModule,
         SharedModule,
+        HttpClientTestingModule
       ],
       declarations: [LoginComponent],
       providers: [
-        { provide: Router, useValue: router }
+        { provide: Router, useValue: routerSpy },
+        {provide: AuthService, useValue: authServiceSpy }
       ],
     }).compileComponents();
   });
@@ -56,12 +61,18 @@ describe('LoginComponent', () => {
     it('it should ', () => {});
   });
 
-  xdescribe('onSubmit', () => {});
+  describe('onSubmit', () => {
+    it('it should navigate to registration page when click on "Create new accout?"', () => {
+      component.registerUser();
+      expect(authServiceSpy.isUser$).toBeTrue();
+      expect(routerSpy.navigate).toHaveBeenCalledWith([RoutePaths.LANDING_PAGE]);
+    });
+  });
 
   describe('registerUser', () => {
     it('it should navigate to registration page when click on "Create new accout?"', () => {
       component.registerUser();
-      expect(router.navigate).toHaveBeenCalledWith([RoutePaths.REGISTRATION]);
+      expect(routerSpy.navigate).toHaveBeenCalledWith([RoutePaths.REGISTRATION]);
     });
   });
 });

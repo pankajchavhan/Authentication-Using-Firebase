@@ -21,8 +21,12 @@ export class LoginComponent implements OnInit {
 
   buildForm(): void {
     this.loginform = new FormGroup({
-      email: new FormControl('', Validators.email),
-      password: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.email,Validators.required]),
+      password: new FormControl('',[Validators.required,
+      Validators.pattern(
+        /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
+      ),
+      Validators.minLength(8)]),
     });
   }
 
@@ -36,6 +40,8 @@ export class LoginComponent implements OnInit {
     };
 
     this.authService.signIn(payload).subscribe((res: SignInResponse) => {
+      this.authService.isUser$.next(true);
+      console.log(this.authService.isUser$);
       this.router.navigate([RoutePaths.LANDING_PAGE]);
     });
   }
@@ -44,7 +50,7 @@ export class LoginComponent implements OnInit {
     this.router.navigate([RoutePaths.REGISTRATION]);
   }
 
-  get form() {
-    return this.loginform.get('email');
-  }
+    // convenience getter for easy access to form fields
+    get form() { return this.loginform.controls; }
+
 }

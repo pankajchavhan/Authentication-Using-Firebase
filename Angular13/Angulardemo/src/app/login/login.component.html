@@ -12,9 +12,8 @@
                          <input matInput 
                              placeholder="Email" 
                              formControlName="email">
-                         <!-- <mat-error *ngIf="isFieldInvalid('userName')">
-                           Please inform your user name
-                         </mat-error> -->
+                         <mat-error *ngIf=" ( form['email'].touched) && form['email'].hasError('required')"> email is required</mat-error>
+                         <mat-error *ngIf=" (form['email'].dirty && form['email'].touched) && form['email'].hasError('email')">Invalid email id</mat-error>
                        </mat-form-field>
                        <mat-form-field class="full-width-input">
                          <mat-icon matPrefix>lock</mat-icon> 
@@ -22,10 +21,8 @@
                             type="password" 
                             placeholder="Password" 
                             formControlName="password" >
-                         <!-- <mat-error *ngIf="isFieldInvalid('userName')">
-                           Please inform your password
-                         </mat-error> -->
-
+                            <mat-error *ngIf=" (form['password'].touched) && form['password'].hasError('required')">password is required</mat-error>
+                            <mat-error *ngIf="(form['password'].dirty && form['password'].touched) && form['password'].hasError('pattern')">Password must contain more than 8 characters, 1 upper case letter, and 1 special character</mat-error>
                        </mat-form-field><br><br>
                        <button class="full-width-input" 
                        mat-raised-button 
