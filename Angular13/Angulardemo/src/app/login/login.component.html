@@ -6,14 +6,23 @@
                  <mat-card>
                    <mat-card-content>
                      <form [formGroup]="loginform" (ngSubmit)="onSubmit()">
-                       <h1 class="fw-bold">Login</h1>
+                       <h1 class="fw-bold my-4 text-center">Login</h1>
+                       <div class="alert alert-danger text-center" role="alert" *ngIf="isShowerror">
+                        {{errorMsg}}
+                      </div>
                        <mat-form-field class="full-width-input">
                          <mat-icon matPrefix>account_circle</mat-icon>
                          <input matInput 
                              placeholder="Email" 
                              formControlName="email">
-                         <mat-error *ngIf=" ( form['email'].touched) && form['email'].hasError('required')"> email is required</mat-error>
-                         <mat-error *ngIf=" (form['email'].dirty && form['email'].touched) && form['email'].hasError('email')">Invalid email id</mat-error>
+                         <mat-error 
+                             *ngIf=" ( form['email'].touched) && form['email'].hasError('required')">
+                               Email is required
+                         </mat-error>
+                         <mat-error 
+                              *ngIf=" (form['email'].dirty && form['email'].touched) && form['email'].hasError('email')">
+                               Invalid email id
+                        </mat-error>
                        </mat-form-field>
                        <mat-form-field class="full-width-input">
                          <mat-icon matPrefix>lock</mat-icon> 
@@ -21,20 +30,26 @@
                             type="password" 
                             placeholder="Password" 
                             formControlName="password" >
-                            <mat-error *ngIf=" (form['password'].touched) && form['password'].hasError('required')">password is required</mat-error>
-                            <mat-error *ngIf="(form['password'].dirty && form['password'].touched) && form['password'].hasError('pattern')">Password must contain more than 8 characters, 1 upper case letter, and 1 special character</mat-error>
+                          <mat-error 
+                              *ngIf=" (form['password'].touched) && form['password'].hasError('required')">
+                                Password is required
+                          </mat-error>
+                          <mat-error 
+                               *ngIf="(form['password'].dirty && form['password'].touched) && form['password'].hasError('pattern')">
+                                 Password must contain more than 8 characters, 1 upper case letter, and 1 special character
+                          </mat-error>
                        </mat-form-field><br><br>
                        <button class="full-width-input" 
-                       mat-raised-button 
-                          color="primary"
-                          type="submit"
-                          [disabled]="loginform.invalid">
+                            mat-raised-button 
+                            color="primary"
+                            type="submit"
+                            [disabled]="loginform.invalid">
                                LOG IN
                        </button>
                      </form><br>
                        <button class="create-new-account-btn"
-                          (click)="registerUser()"
-                          type="button">
+                           (click)="registerUser()"
+                           type="button">
                                Create new account?
                        </button>
                    </mat-card-content>

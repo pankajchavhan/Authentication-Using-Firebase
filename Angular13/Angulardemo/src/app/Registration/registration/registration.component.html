@@ -5,44 +5,74 @@
              <div class="signUp-content">
                  <mat-card>
                    <mat-card-content>
-                     <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-                       <h1 class="fw-bold">Register</h1>
+                     <form [formGroup]="registrationForm">
+                       <h1 class="fw-bold my-4 text-center">Register</h1>
+                       <div class="alert alert-danger text-center" role="alert" *ngIf="isShowerror">
+                        {{errorMsg}}
+                      </div>
+                      <div class="alert alert-success text-center" role="alert" *ngIf="isRegSuccess ">
+                        {{regSuccessMsg}}
+                      </div>
                        <mat-form-field class="full-width-input">
                          <mat-icon matPrefix>account_box</mat-icon>
                          <input matInput 
                              placeholder="First Name" 
                              formControlName="firstName">
+                             <mat-error>
+                               First name is required.
+                            </mat-error>
                        </mat-form-field>
                        <mat-form-field class="full-width-input">
                         <mat-icon matPrefix>account_box</mat-icon>
                         <input matInput 
                             placeholder="Last Name" 
                             formControlName="lastName">
+                            <mat-error>
+                               last name is required.
+                            </mat-error>
                       </mat-form-field>
                       <mat-form-field class="full-width-input">
                         <mat-icon matPrefix>alternate_email</mat-icon>
                         <input matInput 
                             placeholder="Email*" 
                             formControlName="email">
-                        <!-- <mat-error *ngIf="isFieldInvalid('userName')">
-                          Please inform your user name
-                        </mat-error> -->
+                            <mat-error 
+                               *ngIf=" ( form['email'].touched) && form['email'].hasError('required')">
+                                  Email is required.
+                            </mat-error>
+                            <mat-error 
+                               *ngIf=" (form['email'].dirty && form['email'].touched) && form['email'].hasError('email')">
+                                  Invalid email id
+                            </mat-error>
                       </mat-form-field>
                        <mat-form-field class="full-width-input">
                          <mat-icon matPrefix>lock</mat-icon> 
                          <input matInput 
-                            type="password" 
+                            [type]="hide ? 'password' : 'text'"
                             placeholder="Password" 
                             formControlName="password" >
-                         <!-- <mat-error *ngIf="isFieldInvalid('userName')">
-                           Please inform your password
-                         </mat-error> -->
+                            <button 
+                               mat-icon-button matSuffix 
+                               (click)="hide = !hide" 
+                               [attr.aria-label]="'Hide password'" 
+                               [attr.aria-pressed]="hide">
+                              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                            <mat-error 
+                              *ngIf=" (form['password'].touched) && form['password'].hasError('required')">
+                                Password is required
+                            </mat-error>
+                            <mat-error 
+                             *ngIf="(form['password'].dirty && form['password'].touched) && form['password'].hasError('pattern')">
+                               Password must contain more than 8 characters, 1 upper case letter, and 1 special character
+                            </mat-error>
                        </mat-form-field><br><br>
                        <button class="full-width-input" 
                           mat-raised-button 
                           color="primary"
-                          type="submit"
-                          [disabled]="registrationForm.invalid">
+                          (click)="onSubmit()"
+                          type="button"
+                          [disabled]="registrationForm.invalid || isRegSuccess">
                                SIGN UP
                        </button>
                      </form><br>
