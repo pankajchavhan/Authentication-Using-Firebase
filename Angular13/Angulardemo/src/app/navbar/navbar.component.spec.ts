@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,7 +18,7 @@ describe('NavbarComponent', () => {
   
   beforeEach(() => {
     routerSpy = jasmine.createSpyObj('Router', ['navigate']);
-    authServiceSpy = jasmine.createSpyObj('AuthService', ['signOut','isUser$']);
+    authServiceSpy = jasmine.createSpyObj('AuthService', ['signOut']);
   });
 
   beforeEach(async () => {
@@ -28,6 +29,7 @@ describe('NavbarComponent', () => {
         AppRoutingModule,
         BrowserAnimationsModule,
         SharedModule,
+        HttpClientTestingModule,
       ],
       declarations: [NavbarComponent],
       providers: [
