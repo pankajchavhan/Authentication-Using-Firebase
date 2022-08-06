@@ -54,8 +54,8 @@ export class RegistrationComponent implements OnInit {
 
   onSubmit() {
     const payload: SignUpRequest = {
-      email: this.registrationForm.value.email,
-      password: this.registrationForm.value.password,
+      email: this.email.value,
+      password: this.password.value,
     };
 
     this.authService.signUp(payload).subscribe(
