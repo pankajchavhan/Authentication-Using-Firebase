@@ -34,29 +34,26 @@ describe('AuthGuard', () => {
     expect(guard).toBeTruthy();
   });
 
-  // describe('#canLoad', () => {
-  //   it('it should call isLoggedIn', () => {
-  //     authServiceSpy.isLoggedIn.and.returnValue(new BehaviorSubject<boolean>(true));
-  //     guard.canLoad();
-  //     expect(authServiceSpy.isLoggedIn).toHaveBeenCalled();
-  //     expect(routerSpy.createUrlTree).toHaveBeenCalled();
-  //   });
-  // });
+  describe('#canLoad', () => {
+    it('it should call isLoggedIn and navigate to specified url', () => {
+      authServiceSpy.isLoggedIn.and.returnValue(new BehaviorSubject<boolean>(true));
+      guard.canLoad();
+      expect(authServiceSpy.isLoggedIn).toHaveBeenCalled();
+      expect(routerSpy.createUrlTree).toHaveBeenCalled();
+    });
 
-  // xdescribe('#canLoad', () => {
-  //   it('it should call isLoggedIn', () => {
-  //     authServiceSpy.isLoggedIn.and.returnValue(new BehaviorSubject(false));
-  //     guard.canLoad();
-  //     expect(authServiceSpy.isLoggedIn).toHaveBeenCalled();
-  //     expect(routerSpy.createUrlTree).toHaveBeenCalledWith([RoutePaths.DASHBOARD,]);
-  //   });
-  // });
+    // it('it should call isLoggedIn and navigate to dashboard page', () => {
+    //   authServiceSpy.isLoggedIn.and.returnValue(new BehaviorSubject(false));
+    //   guard.canLoad();
+    //   expect(authServiceSpy.isLoggedIn).toHaveBeenCalled();
+    //   expect(routerSpy.createUrlTree).toHaveBeenCalledWith([RoutePaths.DASHBOARD,]);
+    // });
 
-  // xdescribe('#canLoad', () => {
-  //   it('it should call isLoggedIn', () => {
-  //     authServiceSpy.isLoggedIn.and.returnValue(throwError());
-  //     guard.canLoad();
-  //     expect(authServiceSpy.isLoggedIn).toHaveBeenCalled();
-  //   });
-  // });
+    // it('it should navigate to dashboard page', () => {
+    //   authServiceSpy.isLoggedIn.and.returnValue(throwError());
+    //   guard.canLoad();
+    //   expect(authServiceSpy.isLoggedIn).toHaveBeenCalled();
+    // });
+
+  });
 });
