@@ -25,5 +25,7 @@ export interface SignInResponse {
     refreshToken: string;
     expiresIn: string;
     localId: string;
-    registered: string;  
+    registered: boolean;  
+    displayName?: string;
+    kind?: string
 }

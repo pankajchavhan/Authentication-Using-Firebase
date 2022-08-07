@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,7 +18,7 @@ describe('NavbarComponent', () => {
   
   beforeEach(() => {
     routerSpy = jasmine.createSpyObj('Router', ['navigate']);
-    authServiceSpy = jasmine.createSpyObj('AuthService', ['isUser$']);
+    authServiceSpy = jasmine.createSpyObj('AuthService', ['signOut']);
   });
 
   beforeEach(async () => {
@@ -28,11 +29,12 @@ describe('NavbarComponent', () => {
         AppRoutingModule,
         BrowserAnimationsModule,
         SharedModule,
+        HttpClientTestingModule,
       ],
       declarations: [NavbarComponent],
       providers: [
         { provide: Router, useValue: routerSpy },
-        {provide: AuthService, useValue: authServiceSpy }
+        { provide: AuthService, useValue: authServiceSpy },
       ],
     }).compileComponents();
   });
@@ -47,25 +49,18 @@ describe('NavbarComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('ngOnInit', () => {
-    it('', () => {
-      component.ngOnInit();
-    });
-  });
-
-  describe('login', () => {
+  describe('#login', () => {
     it('it should navigate to login page when click on login button', () => {
       component.login();
       expect(routerSpy.navigate).toHaveBeenCalledWith([RoutePaths.LOGIN]);
     });
   });
 
-  describe('logout', () => {
-    it('it should navigate to registration page when click on logout button', () => {
+  describe('#logout', () => {
+    it('it should navigate to Login page when click on logout button', () => {
       component.logout();
       expect(authServiceSpy.signOut).toHaveBeenCalled();
       expect(routerSpy.navigate).toHaveBeenCalledWith([RoutePaths.LOGIN]);
     });
   });
-
 });
