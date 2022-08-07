@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { PageTitle } from './enums/page-title';
 import { RoutePaths } from './enums/route-paths';
+import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
    },
    {
       path: RoutePaths.LANDING_PAGE,
+      canLoad:[AuthGuard],
       loadChildren: () => import('./landing-page/landing-page/landing-page.module').then(m => m.LandingPageModule)
    },
 

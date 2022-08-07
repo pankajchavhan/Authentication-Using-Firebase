@@ -53,7 +53,7 @@ describe('AuthService', () => {
   describe('#signOut', () => {
     it('it should set isUser$ false when click on SignOut', () => {
       service.signOut();
-      expect(service.isUser$).toBeFalsy
+      expect(service.isLoggedIn()).toBeFalsy
     });
   });
 });

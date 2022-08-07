@@ -6,6 +6,7 @@ import {
   SignUpErrorConstants,
   SignUpSuccessConstant,
 } from 'src/app/constants/signUp.constants';
+import { PasswordStrengthValidator } from 'src/app/custom-form-validators/password-strength.validators';
 import { RoutePaths } from 'src/app/enums/route-paths';
 import { SignUpRequest, SignUpResponse } from 'src/app/interface/auth.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -36,10 +37,7 @@ export class RegistrationComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
         Validators.required,
-        Validators.pattern(
-          /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
-        ),
-        Validators.minLength(8),
+        PasswordStrengthValidator()
       ]),
     });
   }

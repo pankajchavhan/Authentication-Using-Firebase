@@ -10,19 +10,27 @@ import { AuthService } from '../services/auth/auth.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  isUser!:Observable<boolean>;
+  isUserLoggedIn!:Observable<boolean>;
+  registration=false;
+
   constructor(private router: Router,private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.isUser=this.authService.isUser$;
+    this.isUserLoggedIn=this.authService.isLoggedIn();
   }
 
   login() {
+    this.registration=!this.registration;
     this.router.navigate([RoutePaths.LOGIN]);
   }
 
   logout(){
     this.authService.signOut();
     this.router.navigate([RoutePaths.LOGIN]);
+  }
+
+  signUp(){
+    this.registration=!this.registration;
+    this.router.navigate([RoutePaths.REGISTRATION]);
   }
 }
