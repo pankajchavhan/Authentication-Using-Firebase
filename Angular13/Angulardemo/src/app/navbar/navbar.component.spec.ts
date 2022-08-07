@@ -18,7 +18,7 @@ describe('NavbarComponent', () => {
   
   beforeEach(() => {
     routerSpy = jasmine.createSpyObj('Router', ['navigate']);
-    authServiceSpy = jasmine.createSpyObj('AuthService', ['signOut']);
+    authServiceSpy = jasmine.createSpyObj('AuthService', ['signOut','isLoggedIn']);
   });
 
   beforeEach(async () => {
@@ -61,6 +61,13 @@ describe('NavbarComponent', () => {
       component.logout();
       expect(authServiceSpy.signOut).toHaveBeenCalled();
       expect(routerSpy.navigate).toHaveBeenCalledWith([RoutePaths.LOGIN]);
+    });
+  });
+
+  describe('#signUp', () => {
+    it('it should navigate to registration page when click on signUp button', () => {
+      component.signUp();
+      expect(routerSpy.navigate).toHaveBeenCalledWith([RoutePaths.REGISTRATION]);
     });
   });
 });

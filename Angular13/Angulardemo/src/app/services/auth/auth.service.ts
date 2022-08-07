@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { SignInRequest, SignInResponse, SignUpRequest, SignUpResponse} from 'src/app/interface/auth.model';
 import { environment } from 'src/environments/environment';
 
@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
-  isUser$ = new Subject<boolean>();
+private isLoggedIn$ = new BehaviorSubject<boolean>(false);
   constructor(private http: HttpClient) {}
 
   signUp(payload: SignUpRequest): Observable<SignUpResponse> {
@@ -30,6 +30,10 @@ export class AuthService {
   }
 
   signOut(){
-    this.isUser$.next(false);
+    this.isLoggedIn().next(false);
+  }
+
+  isLoggedIn(){
+    return this.isLoggedIn$;
   }
 }
