@@ -42,12 +42,12 @@ describe('AuthGuard', () => {
       expect(routerSpy.createUrlTree).toHaveBeenCalled();
     });
 
-    // it('it should call isLoggedIn and navigate to dashboard page', () => {
-    //   authServiceSpy.isLoggedIn.and.returnValue(new BehaviorSubject(false));
-    //   guard.canLoad();
-    //   expect(authServiceSpy.isLoggedIn).toHaveBeenCalled();
-    //   expect(routerSpy.createUrlTree).toHaveBeenCalledWith([RoutePaths.DASHBOARD,]);
-    // });
+    it('it should call isLoggedIn and navigate to dashboard page', () => {
+      authServiceSpy.isLoggedIn.and.returnValue(new BehaviorSubject<boolean>(false));
+      guard.canLoad();
+      expect(authServiceSpy.isLoggedIn).toHaveBeenCalled();
+      expect(routerSpy.createUrlTree).toHaveBeenCalledWith([RoutePaths.DASHBOARD,]);
+    });
 
     // it('it should navigate to dashboard page', () => {
     //   authServiceSpy.isLoggedIn.and.returnValue(throwError());

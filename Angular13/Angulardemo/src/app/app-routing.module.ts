@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { PageTitle } from './enums/page-title';
 import { RoutePaths } from './enums/route-paths';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './login/login.component';
 
@@ -16,6 +17,11 @@ const routes: Routes = [
       path: RoutePaths.DASHBOARD,
       component: DashboardComponent,
       data: { title: PageTitle.DASHBOARD }
+   },
+   {
+      path: RoutePaths.FORGOT_PASSWORD,
+      component: ForgotPasswordComponent,
+      data: { title: PageTitle.FORGOT_PASSWORD }
    },
    {
       path: RoutePaths.LOGIN,

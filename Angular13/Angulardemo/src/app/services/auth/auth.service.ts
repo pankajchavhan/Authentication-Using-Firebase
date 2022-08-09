@@ -36,4 +36,9 @@ private isLoggedIn$ = new BehaviorSubject<boolean>(false);
   isLoggedIn(){
     return this.isLoggedIn$;
   }
+
+  resetPassword(reqPayload:{}):Observable<string>{
+    console.log(this.http.post(environment.reset,reqPayload));
+   return this.http.post<string>(environment.reset,reqPayload);
+  }
 }

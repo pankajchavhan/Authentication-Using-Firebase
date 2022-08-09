@@ -18,6 +18,7 @@ import {
   mockSignInApiErrorResponse1,
   mockSignInApiErrorResponse2,
 } from '../mock-api-response/SignInApiErrorResponse.mock';
+import { resetPasswordErrorConstants } from '../constants/reset-password.constants';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -28,7 +29,7 @@ describe('LoginComponent', () => {
 
   beforeEach(() => {
     routerSpy = jasmine.createSpyObj('Router', ['navigate']);
-    authServiceSpy = jasmine.createSpyObj('AuthService', ['signIn','isLoggedIn']);
+    authServiceSpy = jasmine.createSpyObj('AuthService', ['signIn','isLoggedIn','resetPassword']);
   });
 
   beforeEach(async () => {
@@ -136,4 +137,12 @@ describe('LoginComponent', () => {
       ]);
     });
   });
+
+  describe('resetPassword', () => {
+    it('it should navigate forgot-password page', () => {
+      component.resetPassword();
+      expect(routerSpy.navigate).toHaveBeenCalledWith([RoutePaths.FORGOT_PASSWORD]);
+    });
+  });
+
 });
