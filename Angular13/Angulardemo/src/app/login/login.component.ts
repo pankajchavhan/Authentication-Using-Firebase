@@ -50,10 +50,6 @@ export class LoginComponent implements OnInit {
   get password(): FormControl {
     return this.loginform.get('password') as FormControl;
   }
-  
-  get forgotPasswordEmail(): FormControl {
-    return this.forgotPasswordForm.get('email') as FormControl;
-  }
 
   onSubmit(): void {
     const payload: SignInRequest = {
@@ -69,13 +65,10 @@ export class LoginComponent implements OnInit {
       (err: HttpErrorResponse) => {
         this.isShowerror = true;
         if (err.error?.error?.message === 'EMAIL_NOT_FOUND') {
-          console.log('inside EMAIL_NOT_FOUND');
           this.errorMsg = SignInErrorConstants.EMAIL_NOT_FOUND;
         } else if (err.error?.error?.message === 'INVALID_PASSWORD') {
-          console.log('inside INVALID_PASSWORD');
           this.errorMsg = SignInErrorConstants.INVALID_PASSWORD;
         } else if (err.error?.error?.message === 'USER_DISABLED') {
-          console.log('inside USER_DISABLED');
           this.errorMsg = SignInErrorConstants.USER_DISABLED;
         }
       }
@@ -93,25 +86,5 @@ export class LoginComponent implements OnInit {
 
   resetPassword(){
     this.router.navigate([RoutePaths.FORGOT_PASSWORD]);
-  }
-
-  sendCode(){
-    const reqPayload = {
-      email: this.forgotPasswordEmail.value,
-      requestType:"PASSWORD_RESET"
-    };
-    this.authService.resetPassword(reqPayload).subscribe(email=>{
-      this.showSuccessMsgOfForgotPassword=true;
-      this.showErrorOfForgotPassword=false;
-      this.forgotPassword=false;
-    },
-    (err: HttpErrorResponse) => {
-      this.showSuccessMsgOfForgotPassword=false;
-      this.showErrorOfForgotPassword = true;
-      if (err.error?.message === 'EMAIL_NOT_FOUND') {
-        this.errorMsg = resetPasswordErrorConstants.EMAIL_NOT_FOUND;
-      }
-    }
-    );
   }
 }

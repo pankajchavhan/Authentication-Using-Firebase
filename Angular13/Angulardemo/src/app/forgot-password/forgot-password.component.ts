@@ -42,7 +42,7 @@ export class ForgotPasswordComponent implements OnInit {
       email: this.forgotPasswordEmail.value,
       requestType:"PASSWORD_RESET"
     };
-    this.authService.resetPassword(reqPayload).subscribe((email:resetPasswordResponse)=>{
+    this.authService.resetPassword(reqPayload).subscribe(email=>{
       this.show=false;
       this.showErrorOfForgotPassword=false;
     },
