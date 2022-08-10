@@ -30,11 +30,11 @@ export interface SignInResponse {
     kind?: string
 }
 
-export interface resetPasswordRequest {
+export interface ResetPasswordRequest {
     email: string;
     requestType:string;
 } 
 
-export interface resetPasswordResponse {
+export interface ResetPasswordResponse {
     email: string;
 } 

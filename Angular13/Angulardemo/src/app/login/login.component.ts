@@ -16,13 +16,9 @@ import { AuthService } from '../services/auth/auth.service';
 })
 export class LoginComponent implements OnInit {
   loginform!: FormGroup;
-  forgotPasswordForm!:FormGroup;
   errorMsg!: string;
   isShowerror = false;
   passwordHide = true;
-  forgotPassword=false;
-  showSuccessMsgOfForgotPassword=false;
-  showErrorOfForgotPassword=false;
   constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
@@ -37,10 +33,6 @@ export class LoginComponent implements OnInit {
         PasswordStrengthValidator()
       ]),
     });
-
-    this.forgotPasswordForm = new FormGroup({
-      email: new FormControl('', [Validators.email, Validators.required])});
-
   }
 
   get email(): FormControl {

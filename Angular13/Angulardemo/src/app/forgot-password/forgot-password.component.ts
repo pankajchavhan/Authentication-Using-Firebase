@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { resetPasswordErrorConstants } from '../constants/reset-password.constants';
 import { RoutePaths } from '../enums/route-paths';
-import { resetPasswordRequest, resetPasswordResponse } from '../interface/auth.model';
+import { ResetPasswordRequest, ResetPasswordResponse } from '../interface/auth.model';
 import { AuthService } from '../services/auth/auth.service';
 
 @Component({
@@ -38,11 +38,11 @@ export class ForgotPasswordComponent implements OnInit {
   }
   
   sendResetPasswordLink(){
-    const reqPayload:resetPasswordRequest = {
+    const reqPayload:ResetPasswordRequest = {
       email: this.forgotPasswordEmail.value,
       requestType:"PASSWORD_RESET"
     };
-    this.authService.resetPassword(reqPayload).subscribe(email=>{
+    this.authService.resetPassword(reqPayload).subscribe(res=>{
       this.show=false;
       this.showErrorOfForgotPassword=false;
     },

@@ -8,7 +8,7 @@ export const environment = {
   // firebase auth api
   signUpApi: 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB_gepdS1dZuxZAGu6R2_Qb0wUpJDUOh94',
   signInApi: 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyB_gepdS1dZuxZAGu6R2_Qb0wUpJDUOh94',
-  reset:'https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyB_gepdS1dZuxZAGu6R2_Qb0wUpJDUOh94',
+  resetPasswordApi:'https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyB_gepdS1dZuxZAGu6R2_Qb0wUpJDUOh94',
 
   //firebase setup code
   firebase: {
