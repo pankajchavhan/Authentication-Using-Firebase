@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RoutePaths } from 'src/app/enums/route-paths';
+import { resetPasswordErrorConstants } from '../constants/reset-password.constants';
 import { SignInErrorConstants } from '../constants/signIn-error.constants';
 import { PasswordStrengthValidator } from '../custom-form-validators/password-strength.validators';
 import { SignInRequest, SignInResponse } from '../interface/auth.model';
@@ -18,7 +19,6 @@ export class LoginComponent implements OnInit {
   errorMsg!: string;
   isShowerror = false;
   passwordHide = true;
-
   constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
@@ -57,13 +57,10 @@ export class LoginComponent implements OnInit {
       (err: HttpErrorResponse) => {
         this.isShowerror = true;
         if (err.error?.error?.message === 'EMAIL_NOT_FOUND') {
-          console.log('inside EMAIL_NOT_FOUND');
           this.errorMsg = SignInErrorConstants.EMAIL_NOT_FOUND;
         } else if (err.error?.error?.message === 'INVALID_PASSWORD') {
-          console.log('inside INVALID_PASSWORD');
           this.errorMsg = SignInErrorConstants.INVALID_PASSWORD;
         } else if (err.error?.error?.message === 'USER_DISABLED') {
-          console.log('inside USER_DISABLED');
           this.errorMsg = SignInErrorConstants.USER_DISABLED;
         }
       }
@@ -79,5 +76,7 @@ export class LoginComponent implements OnInit {
     return this.loginform.controls;
   }
 
-  sendCode(){}
+  resetPassword(){
+    this.router.navigate([RoutePaths.FORGOT_PASSWORD]);
+  }
 }

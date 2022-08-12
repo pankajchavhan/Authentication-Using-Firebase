@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { SignInRequest, SignInResponse, SignUpRequest, SignUpResponse} from 'src/app/interface/auth.model';
+import { ResetPasswordRequest, ResetPasswordResponse, SignInRequest, SignInResponse, SignUpRequest, SignUpResponse} from 'src/app/interface/auth.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -35,5 +35,9 @@ private isLoggedIn$ = new BehaviorSubject<boolean>(false);
 
   isLoggedIn(){
     return this.isLoggedIn$;
+  }
+
+  resetPassword(reqPayload:ResetPasswordRequest):Observable<ResetPasswordResponse>{
+   return this.http.post<ResetPasswordResponse>(environment.resetPasswordApi,reqPayload);
   }
 }

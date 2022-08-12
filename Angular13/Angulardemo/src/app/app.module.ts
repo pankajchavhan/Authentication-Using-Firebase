@@ -17,6 +17,7 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
     AppComponent,
     NavbarComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,

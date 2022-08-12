@@ -29,3 +29,12 @@ export interface SignInResponse {
     displayName?: string;
     kind?: string
 }
+
+export interface ResetPasswordRequest {
+    email: string;
+    requestType:string;
+} 
+
+export interface ResetPasswordResponse {
+    email: string;
+} 
