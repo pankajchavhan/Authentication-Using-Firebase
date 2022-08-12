@@ -52,7 +52,8 @@ export class LoginComponent implements OnInit {
     this.authService.signIn(payload).subscribe(
       (res: SignInResponse) => {
         this.router.navigate([RoutePaths.LANDING_PAGE]);
-        this.authService.isLoggedIn().next(true);
+        
+        this.authService.setLoggedInStatus(true);
       },
       (err: HttpErrorResponse) => {
         this.isShowerror = true;
@@ -71,6 +72,15 @@ export class LoginComponent implements OnInit {
     this.router.navigate([RoutePaths.REGISTRATION]);
   }
 
+  onGoogleLoginClicked(){
+    //will implement functionality in next PR
+    console.log('google login')
+  }
+
+  onFacebookLoginClicked(){
+    //will implement functionality in next PR
+    console.log('Facebook login')
+  }
   // convenience getter for easy access to form fields
   get form() {
     return this.loginform.controls;

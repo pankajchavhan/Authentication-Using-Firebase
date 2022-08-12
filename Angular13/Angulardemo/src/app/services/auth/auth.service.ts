@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
-private isLoggedIn$ = new BehaviorSubject<boolean>(false);
+ _isLoggedIn$ = new BehaviorSubject<boolean>(false);
   constructor(private http: HttpClient) {}
 
   signUp(payload: SignUpRequest): Observable<SignUpResponse> {
@@ -30,14 +30,20 @@ private isLoggedIn$ = new BehaviorSubject<boolean>(false);
   }
 
   signOut(){
-    this.isLoggedIn().next(false);
+    this.setLoggedInStatus(false);
   }
 
-  isLoggedIn(){
-    return this.isLoggedIn$;
+  getLoggedInStatus():Observable<boolean>{
+    return this._isLoggedIn$.asObservable();
+  }
+
+  setLoggedInStatus(value: boolean){
+   this._isLoggedIn$.next(value);
   }
 
   resetPassword(reqPayload:ResetPasswordRequest):Observable<ResetPasswordResponse>{
-   return this.http.post<ResetPasswordResponse>(environment.resetPasswordApi,reqPayload);
+   return this.http.post<ResetPasswordResponse>(
+    environment.resetPasswordApi,reqPayload
+    );
   }
 }

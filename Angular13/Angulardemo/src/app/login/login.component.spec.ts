@@ -9,7 +9,7 @@ import { RoutePaths } from '../enums/route-paths';
 import { SharedModule } from '../shared/shared.module';
 import { LoginComponent } from './login.component';
 import { AuthService } from '../services/auth/auth.service';
-import { of, throwError } from 'rxjs';
+import { BehaviorSubject, of, throwError } from 'rxjs';
 import { mockSignInSuccessResponse } from '../mock-api-response/SignInApiSuccessresponse.mock';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SignInErrorConstants } from '../constants/signIn-error.constants';
@@ -23,13 +23,14 @@ import { resetPasswordErrorConstants } from '../constants/reset-password.constan
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
-
+  let isLoggedInSpySubject$: BehaviorSubject<boolean>;
   let routerSpy: jasmine.SpyObj<Router>;
   let authServiceSpy: jasmine.SpyObj<AuthService>;
 
   beforeEach(() => {
+    isLoggedInSpySubject$ = new BehaviorSubject<boolean>(false);
     routerSpy = jasmine.createSpyObj('Router', ['navigate']);
-    authServiceSpy = jasmine.createSpyObj('AuthService', ['signIn','isLoggedIn','resetPassword']);
+    authServiceSpy = jasmine.createSpyObj('AuthService', ['signIn','setLoggedInStatus','resetPassword']);
   });
 
   beforeEach(async () => {
@@ -83,14 +84,14 @@ describe('LoginComponent', () => {
       expect(authServiceSpy.signIn).toHaveBeenCalledWith(mockSignInRequest);
     });
 
-    xit('it should navigate to Landing page when signIn api success response', () => {
+    it('it should navigate to Landing page when signIn api success response', () => {
       authServiceSpy.signIn.and.returnValue(of(mockSignInSuccessResponse()));
-
       component.onSubmit();
 
       expect(routerSpy.navigate).toHaveBeenCalledWith([
         RoutePaths.LANDING_PAGE,
       ]);
+      expect(authServiceSpy.setLoggedInStatus).toHaveBeenCalledWith(true);
     });
 
     it('it should set errorMsg equal to SignInErrorConstants.EMAIL_NOT_FOUND  when errormsg is"EMAIL_NOT_FOUND" ', () => {

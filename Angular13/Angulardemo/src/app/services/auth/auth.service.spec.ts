@@ -1,15 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
   let service: AuthService;
-  let httpClientSpy: jasmine.SpyObj<HttpClient>
+  let httpClientSpy: jasmine.SpyObj<HttpClient>;
+  let _isLoggedInSpySubject$: BehaviorSubject<boolean>;
 
   beforeEach(()=>{
+    _isLoggedInSpySubject$ = new BehaviorSubject<boolean>(false);
     httpClientSpy = jasmine.createSpyObj('HttpClient',['post']);
   })
   beforeEach(() => {
@@ -51,9 +54,50 @@ describe('AuthService', () => {
   });
 
   describe('#signOut', () => {
-    it('it should set isUser$ false when click on SignOut', () => {
+    it('it should set setLoggedInStatus false when click on SignOut', () => {
+      //Arrange
+      spyOn(service, "setLoggedInStatus")
+      //Act
       service.signOut();
-      expect(service.isLoggedIn()).toBeFalsy
+      //expect
+      expect(service.setLoggedInStatus).toHaveBeenCalledWith(false);
     });
   });
+ 
+  describe('#setLoggedInStatus', () => {
+    it('it should set _isLoggedIn$  when click on setLoggedInStatus', () => {
+      //Arrange
+     
+      //Act
+      service.setLoggedInStatus(true);
+      //expect
+      expect(service._isLoggedIn$).toBeTrue;
+    });
+  });
+
+  describe('#getLoggedInStatus', () => {
+    it('it should set _isLoggedIn$  when click on getLoggedInStatus', () => {
+      //Arrange
+     
+      //Act
+      service.getLoggedInStatus();
+      //expect
+      expect(service._isLoggedIn$).toBeFalse;
+    });
+  });
+
+  describe('#resetPassword', () => {
+    it('it should call http.post with apiEndpoint and payload', () => {
+      //Arrange
+      const mockResetPasswordRequest = {
+        email: 'pankaj@gmail.com',
+        requestType:"PASSWORD_RESET"
+      };
+      //Act
+      service.resetPassword(mockResetPasswordRequest);
+      //expect
+      expect(httpClientSpy.post).toHaveBeenCalledWith(environment.resetPasswordApi, mockResetPasswordRequest);
+    });
+  });
+
 });

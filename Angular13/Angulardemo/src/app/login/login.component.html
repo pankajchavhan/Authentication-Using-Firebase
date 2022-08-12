@@ -1,56 +1,82 @@
 <div class="body-color">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="signin-content">
-          <mat-card>
-            <mat-card-content>
-              <form [formGroup]="loginform">
-                <h1 class="fw-bold my-4 text-center">Login</h1>
-                <div class="alert alert-danger text-center" role="alert" *ngIf="isShowerror">
-                  {{errorMsg}}
-                </div>
-                <mat-form-field class="full-width-input">
-                  <mat-icon matPrefix>account_circle</mat-icon>
-                  <input matInput placeholder="Email" formControlName="email">
-                  <mat-error *ngIf=" ( form['email'].touched) && form['email'].hasError('required')">
-                    Email is required
-                  </mat-error>
-                  <mat-error *ngIf=" (form['email'].dirty && form['email'].touched) && form['email'].hasError('email')">
-                    Invalid email id
-                  </mat-error>
-                </mat-form-field>
-                <mat-form-field class="full-width-input">
-                  <mat-icon matPrefix>lock</mat-icon>
-                  <input matInput type="password" placeholder="Password" formControlName="password"
-                    [type]="passwordHide ? 'password' : 'text'">
-                  <button mat-icon-button matSuffix (click)="passwordHide = !passwordHide"
-                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="passwordHide">
-                    <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                  </button>
-                  <mat-error *ngIf=" (form['password'].touched) && form['password'].hasError('required')">
-                    Password is required
-                  </mat-error>
-                  <mat-error
-                    *ngIf="(form['password'].dirty && form['password'].touched) && form['password'].hasError('passwordStrength')">
-                    Password must contain more than 8 characters, 1 upper case letter, and 1 special character
-                  </mat-error>
-                </mat-form-field><br><br>
-                <button class="full-width-input" mat-raised-button color="primary" type="submit" (click)="onSubmit()"
-                  [disabled]="loginform.invalid">
-                  LOG IN
-                </button>
-              </form><br>
-              <button class="create-new-account-btn" (click)="registerUser()" type="button">
-                Create new account?
-              </button>
-              <button class="forgot-password-btn" (click)="resetPassword()" type="button">
-                Forgot password?
-              </button>
-            </mat-card-content>
-          </mat-card>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+             <div class="signin-content">
+                 <mat-card>
+                   <mat-card-content>
+                     <form [formGroup]="loginform">
+                       <h1 class="fw-bold my-4 text-center">Login</h1>
+                       <div class="alert alert-danger text-center" role="alert" *ngIf="isShowerror">
+                        {{errorMsg}}
+                      </div>
+                       <mat-form-field class="full-width-input">
+                         <mat-icon matPrefix>account_circle</mat-icon>
+                         <input matInput 
+                             placeholder="Email" 
+                             formControlName="email"
+                             >
+                         <mat-error 
+                             *ngIf=" ( form['email'].touched) && form['email'].hasError('required')">
+                               Email is required
+                         </mat-error>
+                         <mat-error 
+                              *ngIf=" (form['email'].dirty && form['email'].touched) && form['email'].hasError('email')">
+                               Invalid email id
+                        </mat-error>
+                       </mat-form-field>
+                       <mat-form-field class="full-width-input">
+                         <mat-icon matPrefix>lock</mat-icon> 
+                         <input matInput 
+                            type="password" 
+                            placeholder="Password" 
+                            formControlName="password" 
+                            [type]="passwordHide ? 'password' : 'text'"
+                            >
+                            <button mat-icon-button matSuffix (click)="passwordHide = !passwordHide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="passwordHide">
+                             <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                           </button>
+                          <mat-error 
+                              *ngIf=" (form['password'].touched) && form['password'].hasError('required')">
+                                Password is required
+                          </mat-error>
+                          <mat-error 
+                               *ngIf="(form['password'].dirty && form['password'].touched) && form['password'].hasError('passwordStrength')">
+                                 Password must contain more than 8 characters, 1 upper case letter, and 1 special character
+                          </mat-error>
+                       </mat-form-field><br><br>
+                       <button class="full-width-input" 
+                            mat-raised-button 
+                            color="primary"
+                            type="submit"
+                            (click)="onSubmit()"
+                            [disabled]="loginform.invalid">
+                               LOG IN
+                       </button>
+                     </form><br>
+                       <button class="create-new-account-btn"
+                           (click)="registerUser()"
+                           type="button">
+                               Create new account?
+                       </button>
+                       <button class="forgot-password-btn" 
+                            (click)="resetPassword()"
+                             type="button">
+                                Forgot password?
+                      </button>
+                   </mat-card-content><hr>
+                   <div class="text-center">
+                    <p>Or</p>
+                    <cool-google-button color="dark" (click)="onGoogleLoginClicked()">
+                       Login with Google
+                    </cool-google-button> &nbsp;
+                    <cool-facebook-button color="dark" (click)="onFacebookLoginClicked()">
+                       Login with Facebook
+                    </cool-facebook-button>
+                   </div>
+                 </mat-card>
+               </div>
+            </div>
         </div>
       </div>
-    </div>
-  </div>
 </div>

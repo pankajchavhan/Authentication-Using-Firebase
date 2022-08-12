@@ -32,6 +32,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 3. component - ng g c [name]
 4. module- ng g m [name]
 5. interface- ng g i [name]
+5. interceptor- ng generate interceptor [name]
 
 ## Firebase
 ng add @angular/fire 
@@ -54,3 +55,10 @@ ng add @angular/fire
 2. Accept Incomming changes-
 3. Accept both changes-
 4. compare changes- 
+
+# INATALLED PACKAGES
+1.Social login button - npm i @angular-cool/social-login-buttons
+2.
+
+# NOTES
+1. Spinner- https://zoaibkhan.com/blog/how-to-add-loading-spinner-in-angular-with-rxjs/

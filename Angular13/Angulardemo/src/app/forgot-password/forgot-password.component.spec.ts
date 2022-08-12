@@ -12,6 +12,7 @@ import { of, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { resetPasswordErrorConstants } from '../constants/reset-password.constants';
 import { ForgotPasswordComponent } from './forgot-password.component';
+import { ResetPasswordResponse } from '../interface/auth.model';
 
 describe('ForgotPasswordComponent', () => {
   let component: ForgotPasswordComponent;
@@ -65,18 +66,21 @@ describe('ForgotPasswordComponent', () => {
   describe('sendResetPasswordLink', () => {
     it('should call Authservice.resetPassword method with valid request', () => {
       authServiceSpy.resetPassword.and.returnValue(of());
-      const mockResetPasswordnRequest = {
+      const mockResetPasswordRequest = {
         email: 'pankaj@gmail.com',
         requestType:"PASSWORD_RESET"
       };
       component.forgotPasswordEmail.setValue('pankaj@gmail.com');
       component.sendResetPasswordLink();
 
-      expect(authServiceSpy.resetPassword).toHaveBeenCalledWith(mockResetPasswordnRequest);
+      expect(authServiceSpy.resetPassword).toHaveBeenCalledWith(mockResetPasswordRequest);
     });
 
     it('should set "show" and "showErrorOfForgotPassword" value as false on resetPassword api success response', () => {
-      authServiceSpy.resetPassword.and.returnValue(of('pankaj@gmail.com'));
+      const mockResetPasswordnResponse :ResetPasswordResponse = {
+        email: 'pankaj@gmail.com'
+      }
+      authServiceSpy.resetPassword.and.returnValue(of(mockResetPasswordnResponse));
 
       component.sendResetPasswordLink();
 

@@ -18,7 +18,7 @@ describe('NavbarComponent', () => {
   
   beforeEach(() => {
     routerSpy = jasmine.createSpyObj('Router', ['navigate']);
-    authServiceSpy = jasmine.createSpyObj('AuthService', ['signOut','isLoggedIn']);
+    authServiceSpy = jasmine.createSpyObj('AuthService', ['signOut','getLoggedInStatus']);
   });
 
   beforeEach(async () => {

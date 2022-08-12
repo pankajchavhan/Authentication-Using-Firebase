@@ -13,7 +13,7 @@ export class AuthGuard implements CanLoad {
   constructor(private authService: AuthService, private router: Router) { }
 
   canLoad(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.authService.isLoggedIn().pipe(map(res => {
+    return this.authService.getLoggedInStatus().pipe(map(res => {
       this.isLoggedIn = res;
       if (this.isLoggedIn) {
         return true;

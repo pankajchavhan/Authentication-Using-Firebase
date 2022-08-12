@@ -9,6 +9,7 @@ import {LayoutModule} from '@angular/cdk/layout';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 const materialComponents = [
   MatCardModule,
@@ -21,7 +22,7 @@ const materialComponents = [
   LayoutModule,
   MatFormFieldModule,
   MatInputModule,
-  
+  MatProgressSpinnerModule
 ]
 
 @NgModule({
