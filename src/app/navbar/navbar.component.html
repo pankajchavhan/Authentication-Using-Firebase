@@ -1,0 +1,32 @@
+<div style="height:100%;">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Responsive Navigation</span>
+      <span class="menu-spacer"></span>
+      <div fxShow="true" fxHide.lt-md>
+        <!-- The following menu items will be hidden on both SM and XS screen sizes -->
+        <button *ngIf="!(isUserLoggedIn | async) && !registration" (click)="login()" mat-button>Login</button>
+        <button *ngIf="isUserLoggedIn | async" (click)="logout()" mat-button>Logout</button>
+        <button *ngIf="!(isUserLoggedIn | async) && registration" (click)="signUp()" mat-button>Signup</button>
+
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-sidenav-container fxFlexFill>
+    <mat-sidenav #sidenav>
+      <mat-nav-list>
+        <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
+        <button *ngIf="!(isUserLoggedIn | async) && !registration" (click)="login()" mat-button>Login</button>
+        <button *ngIf="isUserLoggedIn | async" (click)="logout()" mat-button>Logout</button>
+        <button *ngIf="!(isUserLoggedIn | async) && registration" (click)="signUp()" mat-button>Signup</button>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content fxFlexFill>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
