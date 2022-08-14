@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+//import {AngularFireAuthModule} from '@angular/fire/auth';
+import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -35,11 +36,14 @@ import { LoadingSpinnerInterceptor } from './interceptor/spinner/loading-spinner
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    AngularFireModule,
+    AngularFireModule.initializeApp(environment.firebase),
     HttpClientModule,
+    AngularFireAuthModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
+   // AngularFireModule.initializeApp(yourFirebaseConfig),
+    //AngularFireDatabaseModule,
     FlexLayoutModule,
     CoolSocialLoginButtonsModule
   ],

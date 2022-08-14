@@ -10,6 +10,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatMenuModule} from '@angular/material/menu';
 
 const materialComponents = [
   MatCardModule,
@@ -22,7 +23,8 @@ const materialComponents = [
   LayoutModule,
   MatFormFieldModule,
   MatInputModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatMenuModule
 ]
 
 @NgModule({

@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -10,6 +12,8 @@ describe('AuthService', () => {
   let service: AuthService;
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
   let _isLoggedInSpySubject$: BehaviorSubject<boolean>;
+  let routerSpy: jasmine.SpyObj<Router>;
+  let angularFireAuthSpy: jasmine.SpyObj<AngularFireAuth>;
 
   beforeEach(()=>{
     _isLoggedInSpySubject$ = new BehaviorSubject<boolean>(false);
@@ -19,7 +23,9 @@ describe('AuthService', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
-        {provide: HttpClient, useValue: httpClientSpy}
+        {provide: HttpClient, useValue: httpClientSpy},
+        {provide: Router, useValue: routerSpy},
+        {provide: AngularFireAuth, useValue: angularFireAuthSpy}
       ],
     });
     service = TestBed.inject(AuthService);
