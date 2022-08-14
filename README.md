@@ -58,6 +58,7 @@ ng add @angular/fire
 
 # INATALLED PACKAGES
 1.Social login button - npm i @angular-cool/social-login-buttons
+2. pre-commit checks: npx husky-init && npm install
 
 
 # NOTES
