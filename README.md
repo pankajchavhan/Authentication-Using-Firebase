@@ -65,3 +65,4 @@ ng add @angular/fire
 1. Spinner- https://zoaibkhan.com/blog/how-to-add-loading-spinner-in-angular-with-rxjs/
 2. made main branch as default...so from now use main branch instead master to take latest pull. now master branch is useless..our PR will also merged in main branch only. 
 3. to test forgot password - https://temp-mail.org/en
+4. firebase social login reference - https://www.positronx.io/build-firebase-login-with-facebook-in-angular/
