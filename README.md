@@ -58,7 +58,7 @@ ng add @angular/fire
 
 # INATALLED PACKAGES
 1.Social login button - npm i @angular-cool/social-login-buttons
-2.
+
 
 # NOTES
 1. Spinner- https://zoaibkhan.com/blog/how-to-add-loading-spinner-in-angular-with-rxjs/
