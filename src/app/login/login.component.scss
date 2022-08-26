@@ -1,26 +1,35 @@
 mat-card {
-    max-width: 500px;
-    margin: 2em auto;
-    
-  }
-  .signin-content {
-    padding: 60px 1rem;
-  }
-  .full-width-input {
-    width: 100%;
-  }
- .create-new-account-btn , 
- .forgot-password-btn{
-    text-align: left;
-    background: none;
-    color: blue;
-    border: none;
- }
- .body-color{
-    background-image: linear-gradient(to right,#f8fbff, #e0edf8);
-    height: 100%;
- }
+  max-width: 500px;
+  margin: 2em auto;
 
- .example-container .mat-form-field + .mat-form-field {
+}
+
+.signin-content {
+  padding: 20px 1rem;
+}
+
+.full-width-input {
+  width: 100%;
+}
+
+.create-new-account-btn,
+.forgot-password-btn {
+  text-align: left;
+  background: none;
+  color: blue;
+  border: none;
+}
+
+.body-color {
+  //  background-image: linear-gradient(to right,#f8fbff, #e0edf8);
+  background: url(/assets/background.jpg);
+  height: 100%;
+}
+
+.example-container .mat-form-field+.mat-form-field {
   margin-left: 8px;
+}
+
+mat-card {
+  opacity: 0.8;
 }

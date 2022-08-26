@@ -4,41 +4,59 @@
       <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
         <mat-icon>menu</mat-icon>
       </button>
-      <span>Responsive Navigation</span>
-      <span class="menu-spacer"></span>
-      <div fxShow="true" fxHide.lt-md>
-        <!-- The following menu items will be hidden on both SM and XS screen sizes -->
-        <!-- <button *ngIf="!(isUserLoggedIn | async) && !registration" (click)="login()" mat-button>Login</button>
-        <button *ngIf="isUserLoggedIn | async" (click)="logout()" mat-button>Logout</button>
-        <button *ngIf="!(isUserLoggedIn | async) && registration" (click)="signUp()" mat-button>Signup</button> -->
+      <mat-icon class="flight-icon">flight_takeoff</mat-icon>&nbsp;&nbsp;
+      <span>Booking.com</span>
 
-        <div *ngIf="isUserLoggedIn | async" class="col" id="navbar-list-4">
-          <ul class="navbar-nav">
+      <span class="menu-spacer"></span>
+      <div class="example-button-row">
+        <button mat-button (click)="navigateToDashboard()">
+          <mat-icon>dashboard</mat-icon>
+          Dashboard
+        </button>
+      </div>
+      <div fxShow="true" fxHide.lt-sm>
+        <ng-container *ngIf= "isUserLoggedIn | async" class="login-icon" >
+          <div *ngIf= "socialLoginApiResponse$ | async as socialApiRes">
+            <ul class="navbar-nav">
               <li class="nav-item dropdown">
-              <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="40" height="40" class="rounded-circle">
-                <mat-icon>arrow_drop_down</mat-icon>
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <img src="{{socialApiRes?.additionalUserInfo?.profile?.picture}}"
+                     width="40"
+                     height="40"
+                     class="rounded-circle">&nbsp;
+                     <span>{{socialApiRes?.additionalUserInfo?.profile?.name}}</span>&nbsp;
+                     <mat-icon>arrow_drop_down</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
+                <!-- Lazy rendering
+                By default, the menu content will be initialized even when the panel is closed.
+                To defer initialization until the menu is open, the content can be provided as an ng-template with the matMenuContent attribute: -->
+                <ng-template matMenuContent>
+                <p class="dropdown-header">Signed in as</p>
+                <p class="email">{{socialApiRes?.additionalUserInfo?.profile?.email}}</p>
+                <hr>
                 <button mat-menu-item>
-                  <mat-icon></mat-icon>
+                  <mat-icon>person_outline</mat-icon>
                   <span>Your Profile</span>
                 </button>
-                <button (click)="logout()" mat-menu-item>
-                  <mat-icon></mat-icon>
-                  <span>Logout</span>
-                </button>
                 <button mat-menu-item>
-                  <mat-icon></mat-icon>
-                  <span>Disable alerts</span>
+                  <mat-icon>settings</mat-icon>
+                  <span>Setting</span>
                 </button>
+                <button mat-menu-item
+                        (click)="logout()">
+                  <mat-icon>exit_to_app</mat-icon>
+                  <span>Log Out</span>
+                </button>
+                </ng-template>
               </mat-menu>
-            </li>   
+            </li>
           </ul>
-        </div>
+          </div>
+        </ng-container>
 
-        <button *ngIf="!(isUserLoggedIn | async) && !registration" (click)="login()" mat-button>Login</button>
-        <button *ngIf="!(isUserLoggedIn | async) && registration" (click)="signUp()" mat-button>Signup</button>
+        <button *ngIf="!(isUserLoggedIn | async)" (click)="login()" mat-button>Login</button>
+        <button *ngIf="!(isUserLoggedIn | async)" (click)="signUp()" mat-button>Signup</button>
 
       </div>
     </mat-toolbar-row>

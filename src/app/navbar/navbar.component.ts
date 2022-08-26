@@ -10,13 +10,16 @@ import { AuthService } from '../services/auth/auth.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  isUserLoggedIn!:Observable<boolean>;
-  registration=false;
+
+  isUserLoggedIn!: Observable<boolean>;
+  registration = false;
+  socialLoginApiResponse$!: Observable<any>;
 
   constructor(private router: Router,private authService: AuthService) { }
 
   ngOnInit(): void {
     this.isUserLoggedIn=this.authService.getLoggedInStatus();
+    this.socialLoginApiResponse$ = this.authService.socialSignInApiResponse$;
   }
 
   login() {
@@ -32,5 +35,9 @@ export class NavbarComponent implements OnInit {
   signUp(){
     this.registration=!this.registration;
     this.router.navigate([RoutePaths.REGISTRATION]);
+  }
+
+  navigateToDashboard(){
+    this.router.navigate([RoutePaths.DASHBOARD]);
   }
 }

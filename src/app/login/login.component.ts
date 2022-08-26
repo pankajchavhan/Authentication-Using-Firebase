@@ -73,15 +73,11 @@ export class LoginComponent implements OnInit {
   }
 
   onGoogleLoginClicked(){
-    //will implement functionality in next PR
     this.authService.googleSignIn();
-    console.log('google login')
   }
 
   onFacebookLoginClicked(){
-    //will implement functionality in next PR
-    this.authService.FacebookAuth();
-    console.log('Facebook login')
+    this.authService.FacebookSignIn();
   }
   // convenience getter for easy access to form fields
   get form() {
