@@ -1,10 +1,10 @@
 mat-card {
     max-width: 500px;
     margin: 2em auto;
-    
+
   }
   .signUp-content {
-    padding: 60px 1rem;
+    padding: 20px 1rem;
   }
   .full-width-input {
     width: 100%;
@@ -16,6 +16,9 @@ mat-card {
     border: none;
  }
  .body-color{
-    background-image: linear-gradient(to right,#f8fbff, #e0edf8);
+  background-image: url(/assets/background.jpg);
     height: 100%;
  }
+ mat-card {
+  opacity: 0.8;
+}

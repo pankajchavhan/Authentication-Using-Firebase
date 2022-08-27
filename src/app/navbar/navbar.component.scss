@@ -1,4 +1,36 @@
 .menu-spacer {
-    flex: 1 1 auto;
-  }
-  
+  flex: 1 1 auto;
+}
+
+.dropdown {
+  margin-right: 150px;
+}
+
+.dropdown-header {
+  text-align: center;
+  line-height: normal;
+}
+
+.email {
+  text-align: center;
+  font-size: small;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.mat-drawer-content {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  height: 100%;
+  overflow: hidden;
+}
+
+.mat-toolbar.mat-primary {
+  background: #212529;
+  color: #fff;
+}
+
+.flight-icon {
+  color: skyblue;
+}

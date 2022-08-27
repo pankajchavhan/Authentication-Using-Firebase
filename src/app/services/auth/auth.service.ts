@@ -1,24 +1,38 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { ResetPasswordRequest, ResetPasswordResponse, SignInRequest, SignInResponse, SignUpRequest, SignUpResponse} from 'src/app/interface/auth.model';
+import { BehaviorSubject, Observable } from 'rxjs';
+import {
+  ResetPasswordRequest,
+  ResetPasswordResponse,
+  SignInRequest,
+  SignInResponse,
+  SignUpRequest,
+  SignUpResponse,
+} from 'src/app/interface/auth.model';
 import { environment } from 'src/environments/environment';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-
-//import firebase from "firebase/app";
-import "firebase/auth";
-import * as firebase from 'firebase/compat';
-import { FacebookAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import { Router } from '@angular/router';
 import { RoutePaths } from 'src/app/enums/route-paths';
+
+//import firebase from "firebase/app";
+import 'firebase/auth';
+import { FacebookAuthProvider, GoogleAuthProvider } from 'firebase/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
- _isLoggedIn$ = new BehaviorSubject<boolean>(false);
-  constructor(private http: HttpClient,private afAuth:AngularFireAuth,private router:Router) {}
+  _isLoggedIn$ = new BehaviorSubject<boolean>(false);
+  private _soialSignInApiResponse$ = new BehaviorSubject<any>(null);
 
+  constructor(
+    private http: HttpClient,
+    private afAuth: AngularFireAuth,
+    private router: Router
+  ) {}
+
+ 
   signUp(payload: SignUpRequest): Observable<SignUpResponse> {
     const reqPayload = {
       email: payload.email,
@@ -34,50 +48,54 @@ export class AuthService {
       password: payload.password,
       returnSecureToken: true,
     };
-    return this.http.post<SignInResponse>(environment.signInApi,reqPayload);
+    return this.http.post<SignInResponse>(environment.signInApi, reqPayload);
   }
 
-  // googleSignIn(){
-  //  // this.afAuth.signInWithRedirect(new firebase..GoogleAuthProvider())
-  // }
-  
+  get socialSignInApiResponse$():Observable<any>{
+    return this._soialSignInApiResponse$.asObservable();
+  }
+  // Sign in with google
   googleSignIn() {
     return this.AuthLogin(new GoogleAuthProvider());
   }
+  // Sign in with Facebook
+  FacebookSignIn() {
+    return this.AuthLogin(new FacebookAuthProvider());
+  }
   // Auth logic to run auth providers
-  AuthLogin(provider:any) {
+  AuthLogin(provider: any) {
     return this.afAuth
       .signInWithPopup(provider)
-      .then((result) => {
+      .then((response) => {
+        this._soialSignInApiResponse$.next(response);
         this.setLoggedInStatus(true);
         this.router.navigate([RoutePaths.LANDING_PAGE]);
-        console.log('You have been successfully logged in!');
+        console.log('google signin successfully',response);
       })
       .catch((error) => {
-        console.log(error);
+        console.log("google sigin api error",error);
       });
   }
 
-    // Sign in with Facebook
-    FacebookAuth() {
-      return this.AuthLogin(new FacebookAuthProvider());
-    }
-    
-  signOut(){
+
+  signOut() {
     this.setLoggedInStatus(false);
   }
 
-  getLoggedInStatus():Observable<boolean>{
+  getLoggedInStatus(): Observable<boolean> {
     return this._isLoggedIn$.asObservable();
   }
 
-  setLoggedInStatus(value: boolean){
-   this._isLoggedIn$.next(value);
+  setLoggedInStatus(value: boolean) {
+    this._isLoggedIn$.next(value);
   }
 
-  resetPassword(reqPayload:ResetPasswordRequest):Observable<ResetPasswordResponse>{
-   return this.http.post<ResetPasswordResponse>(
-    environment.resetPasswordApi,reqPayload
+  resetPassword(
+    reqPayload: ResetPasswordRequest
+  ): Observable<ResetPasswordResponse> {
+    return this.http.post<ResetPasswordResponse>(
+      environment.resetPasswordApi,
+      reqPayload
     );
   }
 }
