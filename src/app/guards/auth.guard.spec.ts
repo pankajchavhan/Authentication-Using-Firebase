@@ -7,6 +7,7 @@ import { AuthGuard } from './auth.guard';
 import { Router } from '@angular/router';
 import { RoutePaths } from '../enums/route-paths';
 import { mockSignInApiErrorResponse } from '../mock-api-response/SignInApiErrorResponse.mock';
+import { mockSignInSuccessResponse } from '../mock-api-response/SignInApiSuccessresponse.mock';
 
 describe('AuthGuard', () => {
   let guard: AuthGuard;
@@ -35,13 +36,12 @@ describe('AuthGuard', () => {
 
   describe('#canLoad', () => {
 
-    it('it should return true when getLoggedInStatus() return true', () => {
+    it('should return true when getLoggedInStatus() return signInSucess Response', () => {
       //Arrange
-      authServiceSpy.getLoggedInStatus.and.returnValue(of(true));
+      authServiceSpy.getLoggedInStatus.and.returnValue(of(mockSignInSuccessResponse()));
       //Act
-      
-      //expect
       const obs = guard.canLoad()as any;
+      //Assert
       obs.subscribe((result: any)=>{
         expect(result).toBe(true);
       })
@@ -49,9 +49,9 @@ describe('AuthGuard', () => {
       
     });
 
-    it('it should navigate to Login Page if authService.getLoggedInStatus() return false ', () => {
+    it('should navigate to Login Page if authService.getLoggedInStatus() return null ', () => {
       //Arrange
-      authServiceSpy.getLoggedInStatus.and.returnValue(of(false));
+      authServiceSpy.getLoggedInStatus.and.returnValue(of(null));
       //Act
       const obs = guard.canLoad()as any;
       obs.subscribe();
@@ -59,7 +59,7 @@ describe('AuthGuard', () => {
       expect(routerSpy.createUrlTree).toHaveBeenCalledWith([RoutePaths.LOGIN]);
     });
 
-    it('it should navigate to Login page on API failure', () => {
+    it('should navigate to Login page on API failure', () => {
       //Arrange
       authServiceSpy.getLoggedInStatus.and.returnValue(throwError({ error : "Api failure"}));
       //Act

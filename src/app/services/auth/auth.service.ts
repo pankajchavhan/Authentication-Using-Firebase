@@ -23,8 +23,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
   providedIn: 'root',
 })
 export class AuthService {
-  _isLoggedIn$ = new BehaviorSubject<boolean>(false);
-  private _soialSignInApiResponse$ = new BehaviorSubject<any>(null);
+  _isLoggedIn$ = new BehaviorSubject<any>(null);
 
   constructor(
     private http: HttpClient,
@@ -51,9 +50,6 @@ export class AuthService {
     return this.http.post<SignInResponse>(environment.signInApi, reqPayload);
   }
 
-  get socialSignInApiResponse$():Observable<any>{
-    return this._soialSignInApiResponse$.asObservable();
-  }
   // Sign in with google
   googleSignIn() {
     return this.AuthLogin(new GoogleAuthProvider());
@@ -67,8 +63,7 @@ export class AuthService {
     return this.afAuth
       .signInWithPopup(provider)
       .then((response) => {
-        this._soialSignInApiResponse$.next(response);
-        this.setLoggedInStatus(true);
+        this.setLoggedInStatus(response);
         this.router.navigate([RoutePaths.LANDING_PAGE]);
         console.log('google signin successfully',response);
       })
@@ -77,17 +72,16 @@ export class AuthService {
       });
   }
 
-
   signOut() {
-    this.setLoggedInStatus(false);
+    this.setLoggedInStatus(null);
   }
 
-  getLoggedInStatus(): Observable<boolean> {
+  getLoggedInStatus(): Observable<any> {
     return this._isLoggedIn$.asObservable();
   }
 
-  setLoggedInStatus(value: boolean) {
-    this._isLoggedIn$.next(value);
+  setLoggedInStatus(signInRes:any) {
+    this._isLoggedIn$.next(signInRes);
   }
 
   resetPassword(

@@ -11,15 +11,13 @@ import { AuthService } from '../services/auth/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
-  isUserLoggedIn!: Observable<boolean>;
+  isUserLoggedIn!: Observable<any>;
   registration = false;
-  socialLoginApiResponse$!: Observable<any>;
 
   constructor(private router: Router,private authService: AuthService) { }
 
   ngOnInit(): void {
     this.isUserLoggedIn=this.authService.getLoggedInStatus();
-    this.socialLoginApiResponse$ = this.authService.socialSignInApiResponse$;
   }
 
   login() {
