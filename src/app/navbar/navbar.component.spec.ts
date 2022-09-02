@@ -50,14 +50,14 @@ describe('NavbarComponent', () => {
   });
 
   describe('#login', () => {
-    it('it should navigate to login page when click on login button', () => {
+    it('should navigate to login page when click on login button', () => {
       component.login();
       expect(routerSpy.navigate).toHaveBeenCalledWith([RoutePaths.LOGIN]);
     });
   });
 
   describe('#logout', () => {
-    it('it should navigate to Login page when click on logout button', () => {
+    it('should navigate to Login page when click on logout button', () => {
       component.logout();
       expect(authServiceSpy.signOut).toHaveBeenCalled();
       expect(routerSpy.navigate).toHaveBeenCalledWith([RoutePaths.LOGIN]);
@@ -65,9 +65,16 @@ describe('NavbarComponent', () => {
   });
 
   describe('#signUp', () => {
-    it('it should navigate to registration page when click on signUp button', () => {
+    it('should navigate to registration page when click on signUp button', () => {
       component.signUp();
       expect(routerSpy.navigate).toHaveBeenCalledWith([RoutePaths.REGISTRATION]);
+    });
+  });
+
+  describe('#navigateToDashboard', () => {
+    it('should navigate to Dashboard page when click on Dashboard button', () => {
+      component.navigateToDashboard();
+      expect(routerSpy.navigate).toHaveBeenCalledWith([RoutePaths.DASHBOARD]);
     });
   });
 });

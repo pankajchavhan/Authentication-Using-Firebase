@@ -30,7 +30,9 @@ describe('LoginComponent', () => {
   beforeEach(() => {
     isLoggedInSpySubject$ = new BehaviorSubject<boolean>(false);
     routerSpy = jasmine.createSpyObj('Router', ['navigate']);
-    authServiceSpy = jasmine.createSpyObj('AuthService', ['signIn','setLoggedInStatus','resetPassword']);
+    authServiceSpy = jasmine.createSpyObj('AuthService', [
+      'signIn','setLoggedInStatus','resetPassword','googleSignIn','FacebookSignIn'
+    ]);
   });
 
   beforeEach(async () => {
@@ -63,7 +65,7 @@ describe('LoginComponent', () => {
   });
 
   describe('ngOnInit', () => {
-    it('it should call buildform', () => {
+    it('should call buildform', () => {
       spyOn(component, 'buildForm');
 
       expect(component.buildForm).toHaveBeenCalled;
@@ -71,7 +73,7 @@ describe('LoginComponent', () => {
   });
 
   describe('onSubmit', () => {
-    it('it should call Authservice.SignIn method with valid request', () => {
+    it('should call Authservice.SignIn method with valid request', () => {
       authServiceSpy.signIn.and.returnValue(of());
       const mockSignInRequest = {
         email: 'pankaj@gmail.com',
@@ -84,17 +86,17 @@ describe('LoginComponent', () => {
       expect(authServiceSpy.signIn).toHaveBeenCalledWith(mockSignInRequest);
     });
 
-    it('it should navigate to Landing page when signIn api success response', () => {
+    it('should navigate to Landing page when signIn api success response', () => {
       authServiceSpy.signIn.and.returnValue(of(mockSignInSuccessResponse()));
       component.onSubmit();
 
       expect(routerSpy.navigate).toHaveBeenCalledWith([
         RoutePaths.LANDING_PAGE,
       ]);
-      expect(authServiceSpy.setLoggedInStatus).toHaveBeenCalledWith(true);
+      expect(authServiceSpy.setLoggedInStatus).toHaveBeenCalledWith(mockSignInSuccessResponse());
     });
 
-    it('it should set errorMsg equal to SignInErrorConstants.EMAIL_NOT_FOUND  when errormsg is"EMAIL_NOT_FOUND" ', () => {
+    it('should set errorMsg equal to SignInErrorConstants.EMAIL_NOT_FOUND  when errormsg is"EMAIL_NOT_FOUND" ', () => {
       authServiceSpy.signIn.and.returnValue(
         throwError(mockSignInApiErrorResponse)
       );
@@ -103,7 +105,7 @@ describe('LoginComponent', () => {
       expect(component.errorMsg).toEqual(SignInErrorConstants.EMAIL_NOT_FOUND);
     });
 
-    it('it should set errorMsg equal to SignInErrorConstants.INVALID_PASSWORD  when errormsg is"INVALID_PASSWORD" ', () => {
+    it('should set errorMsg equal to SignInErrorConstants.INVALID_PASSWORD  when errormsg is"INVALID_PASSWORD" ', () => {
       // const mockErrorData = {...mockSignInApiErrorResponse().error, message:'INVALID_PASSWORD'};
       // console.log('from spec',mockErrorData)
       // const mockErrorResponse = {...mockSignInApiErrorResponse(),error: mockErrorData};
@@ -116,7 +118,7 @@ describe('LoginComponent', () => {
       expect(component.errorMsg).toEqual(SignInErrorConstants.INVALID_PASSWORD);
     });
 
-    it('it should set errorMsg equal to SignInErrorConstants.USER_DISABLED  when errormsg is"USER_DISABLED" ', () => {
+    it('should set errorMsg equal to SignInErrorConstants.USER_DISABLED  when errormsg is"USER_DISABLED" ', () => {
       // const mockErrorData = {...mockSignInApiErrorResponse().error, message:'INVALID_PASSWORD'};
       // console.log('from spec',mockErrorData)
       // const mockErrorResponse = {...mockSignInApiErrorResponse(),error: mockErrorData};
@@ -131,7 +133,7 @@ describe('LoginComponent', () => {
   });
 
   describe('registerUser', () => {
-    it('it should navigate to registration page when click on "Create new accout?"', () => {
+    it('should navigate to registration page when click on "Create new accout?"', () => {
       component.registerUser();
       expect(routerSpy.navigate).toHaveBeenCalledWith([
         RoutePaths.REGISTRATION,
@@ -140,9 +142,31 @@ describe('LoginComponent', () => {
   });
 
   describe('resetPassword', () => {
-    it('it should navigate forgot-password page', () => {
+    it('should navigate forgot-password page', () => {
       component.resetPassword();
       expect(routerSpy.navigate).toHaveBeenCalledWith([RoutePaths.FORGOT_PASSWORD]);
+    });
+  });
+
+  describe('onGoogleLoginClicked', () => {
+    it('should call authService.googleSignIn() when clicked on onGoogleLoginClicked', () => {
+      //Arrange
+      
+      //Act
+      component.onGoogleLoginClicked();
+      //Assert
+      expect(authServiceSpy.googleSignIn).toHaveBeenCalled;      
+    });
+  });
+
+  describe('onFacebookLoginClicked', () => {
+    it('should call authService.googleSignIn() when clicked on onGoogleLoginClicked', () => {
+      //Arrange
+      
+      //Act
+      component.onFacebookLoginClicked();
+      //Assert
+      expect(authServiceSpy.FacebookSignIn).toHaveBeenCalled;      
     });
   });
 

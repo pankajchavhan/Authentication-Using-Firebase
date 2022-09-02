@@ -15,16 +15,16 @@
         </button>
       </div>
       <div fxShow="true" fxHide.lt-sm>
-        <ng-container *ngIf= "isUserLoggedIn | async" class="login-icon" >
-          <div *ngIf= "socialLoginApiResponse$ | async as socialApiRes">
+        <ng-container *ngIf= "isUserLoggedIn | async as loginApiRes" class="login-icon" >
             <ul class="navbar-nav">
               <li class="nav-item dropdown">
               <button mat-icon-button [matMenuTriggerFor]="menu">
-                <img src="{{socialApiRes?.additionalUserInfo?.profile?.picture}}"
+                <img src="{{loginApiRes?.additionalUserInfo?.profile?.picture}}"
                      width="40"
                      height="40"
-                     class="rounded-circle">&nbsp;
-                     <span>{{socialApiRes?.additionalUserInfo?.profile?.name}}</span>&nbsp;
+                     class="rounded-circle"
+                     onerror="this.onerror=null;this.src='/assets/dummy-profile-picture.png'">&nbsp;
+                     <span>{{loginApiRes?.additionalUserInfo?.profile?.name || loginApiRes?.email?.split('@')[0]}}</span>&nbsp;
                      <mat-icon>arrow_drop_down</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
@@ -33,7 +33,7 @@
                 To defer initialization until the menu is open, the content can be provided as an ng-template with the matMenuContent attribute: -->
                 <ng-template matMenuContent>
                 <p class="dropdown-header">Signed in as</p>
-                <p class="email">{{socialApiRes?.additionalUserInfo?.profile?.email}}</p>
+                <p class="email">{{loginApiRes?.additionalUserInfo?.profile?.email || loginApiRes?.email}}</p>
                 <hr>
                 <button mat-menu-item>
                   <mat-icon>person_outline</mat-icon>
@@ -52,7 +52,7 @@
               </mat-menu>
             </li>
           </ul>
-          </div>
+          
         </ng-container>
 
         <button *ngIf="!(isUserLoggedIn | async)" (click)="login()" mat-button>Login</button>

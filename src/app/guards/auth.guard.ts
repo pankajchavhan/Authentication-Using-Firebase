@@ -9,19 +9,19 @@ import { RoutePaths } from '../enums/route-paths';
   providedIn: 'root'
 })
 export class AuthGuard implements CanLoad {
-  isLoggedIn!: boolean;
+  
   constructor(private authService: AuthService, private router: Router) { }
 
   canLoad(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.authService.getLoggedInStatus().pipe(map(res => {
-      this.isLoggedIn = res;
-      if (this.isLoggedIn) {
+    const urlTree = this.router.createUrlTree([RoutePaths.LOGIN]);
+    return this.authService.getLoggedInStatus().pipe(map(loggedInResponse => {
+      if (loggedInResponse) {
         return true;
       } else {
-        return this.router.createUrlTree([RoutePaths.LOGIN]);
+        return urlTree;
       }
     }),catchError(()=>{
-      return of(this.router.createUrlTree([RoutePaths.LOGIN]));
-    }))
+      return of(urlTree);
+    }));
   }
 }

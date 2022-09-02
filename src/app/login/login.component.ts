@@ -51,9 +51,8 @@ export class LoginComponent implements OnInit {
 
     this.authService.signIn(payload).subscribe(
       (res: SignInResponse) => {
-        this.router.navigate([RoutePaths.LANDING_PAGE]);
-        
-        this.authService.setLoggedInStatus(true);
+        this.router.navigate([RoutePaths.LANDING_PAGE]); 
+        this.authService.setLoggedInStatus(res);
       },
       (err: HttpErrorResponse) => {
         this.isShowerror = true;
