@@ -4,10 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppRoutingModule } from '../app-routing.module';
-import { RoutePaths } from '../enums/route-paths';
-import { AuthService } from '../services/auth/auth.service';
-import { SharedModule } from '../shared/shared.module';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { RoutePaths } from 'src/app/core/enums/route-paths';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { NavbarComponent } from './navbar.component';
 
 describe('NavbarComponent', () => {

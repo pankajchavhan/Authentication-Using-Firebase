@@ -4,15 +4,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppRoutingModule } from '../app-routing.module';
-import { RoutePaths } from '../enums/route-paths';
-import { SharedModule } from '../shared/shared.module';
-import { AuthService } from '../services/auth/auth.service';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { RoutePaths } from 'src/app/core/enums/route-paths';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { of, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { resetPasswordErrorConstants } from '../constants/reset-password.constants';
+import { resetPasswordErrorConstants } from 'src/app/core/constants/reset-password.constants';
 import { ForgotPasswordComponent } from './forgot-password.component';
-import { ResetPasswordResponse } from '../interface/auth.model';
+import { ResetPasswordResponse } from 'src/app/core/interface/auth.model';
 
 describe('ForgotPasswordComponent', () => {
   let component: ForgotPasswordComponent;

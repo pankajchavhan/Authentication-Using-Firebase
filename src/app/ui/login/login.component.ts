@@ -2,12 +2,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RoutePaths } from 'src/app/enums/route-paths';
-import { resetPasswordErrorConstants } from '../constants/reset-password.constants';
-import { SignInErrorConstants } from '../constants/signIn-error.constants';
-import { PasswordStrengthValidator } from '../custom-form-validators/password-strength.validators';
-import { SignInRequest, SignInResponse } from '../interface/auth.model';
-import { AuthService } from '../services/auth/auth.service';
+import { RoutePaths } from 'src/app/core/enums/route-paths';
+import { SignInErrorConstants } from 'src/app/core/constants/signIn-error.constants';
+import { PasswordStrengthValidator } from 'src/app/custom-form-validators/password-strength.validators';
+import { SignInRequest, SignInResponse } from 'src/app/core/interface/auth.model';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',

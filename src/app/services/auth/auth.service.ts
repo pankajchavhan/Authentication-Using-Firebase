@@ -8,10 +8,10 @@ import {
   SignInResponse,
   SignUpRequest,
   SignUpResponse,
-} from 'src/app/interface/auth.model';
+} from 'src/app/core/interface/auth.model';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
-import { RoutePaths } from 'src/app/enums/route-paths';
+import { RoutePaths } from 'src/app/core/enums/route-paths';
 
 //import firebase from "firebase/app";
 import 'firebase/auth';

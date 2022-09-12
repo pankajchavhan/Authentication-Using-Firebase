@@ -1,4 +1,4 @@
-import { SignUpResponse } from "../interface/auth.model";
+import { SignUpResponse } from "src/app/core/interface/auth.model";
 
 
 export function mockSignUpSuccessResponse(): SignUpResponse {

@@ -6,8 +6,8 @@ import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of, throwError } from 'rxjs';
 import { AppRoutingModule } from 'src/app/app-routing.module';
-import { SignUpErrorConstants, SignUpSuccessConstant } from 'src/app/constants/signUp.constants';
-import { RoutePaths } from 'src/app/enums/route-paths';
+import { SignUpErrorConstants, SignUpSuccessConstant } from 'src/app/core/constants/signUp.constants';
+import { RoutePaths } from 'src/app/core//enums/route-paths';
 import { mockSignUpErrorResponse, mockSignUpErrorResponse1, mockSignUpErrorResponse2, mockSignUpErrorResponse3 } from 'src/app/mock-api-response/SignUpApiErrorResponse.mock';
 import { mockSignUpSuccessResponse } from 'src/app/mock-api-response/SignUpApiSucessResponse.mock';
 

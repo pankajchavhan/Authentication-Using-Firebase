@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PageTitle } from 'src/app/enums/page-title';
+import { PageTitle } from 'src/app/core/enums/page-title';
 import { RegistrationComponent } from './registration.component';
 
 const routes: Routes = [

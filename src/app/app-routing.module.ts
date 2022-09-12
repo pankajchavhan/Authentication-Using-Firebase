@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
-import { PageTitle } from './enums/page-title';
-import { RoutePaths } from './enums/route-paths';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { AuthGuard } from './guards/auth.guard';
-import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from 'src/app/ui/dashboard/dashboard/dashboard.component';
+import { PageTitle } from 'src/app/core/enums/page-title';
+import { RoutePaths } from 'src/app/core/enums/route-paths';
+import { ForgotPasswordComponent } from 'src/app/ui/forgot-password/forgot-password.component';
+import { AuthGuard } from 'src/app/guards/auth/auth.guard';
+import { LoginComponent } from 'src/app/ui/login/login.component';
 
 const routes: Routes = [
    {
@@ -30,12 +30,12 @@ const routes: Routes = [
    },
    {
       path: RoutePaths.REGISTRATION,
-      loadChildren: () => import('./Registration/registration/registration.module').then(m => m.RegistrationModule)
+      loadChildren: () => import('src/app/ui/Registration/registration/registration.module').then(m => m.RegistrationModule)
    },
    {
       path: RoutePaths.LANDING_PAGE,
       canLoad:[AuthGuard],
-      loadChildren: () => import('./landing-page/landing-page/landing-page.module').then(m => m.LandingPageModule)
+      loadChildren: () => import('src/app/ui/landing-page/landing-page/landing-page.module').then(m => m.LandingPageModule)
    },
 
 ];

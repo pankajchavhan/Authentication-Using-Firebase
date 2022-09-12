@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { RoutePaths } from '../enums/route-paths';
-import { AuthService } from '../services/auth/auth.service';
+import { RoutePaths } from 'src/app/core/enums/route-paths';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-navbar',

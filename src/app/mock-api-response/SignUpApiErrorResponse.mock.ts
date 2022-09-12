@@ -1,5 +1,3 @@
-
-
 export function mockSignUpErrorResponse(){
     return{
         status: 400,
