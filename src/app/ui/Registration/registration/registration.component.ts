@@ -5,10 +5,10 @@ import { Router } from '@angular/router';
 import {
   SignUpErrorConstants,
   SignUpSuccessConstant,
-} from 'src/app/constants/signUp.constants';
+} from 'src/app/core/constants/signUp.constants';
 import { PasswordStrengthValidator } from 'src/app/custom-form-validators/password-strength.validators';
-import { RoutePaths } from 'src/app/enums/route-paths';
-import { SignUpRequest, SignUpResponse } from 'src/app/interface/auth.model';
+import { RoutePaths } from 'src/app/core/enums/route-paths';
+import { SignUpRequest, SignUpResponse } from 'src/app/core/interface/auth.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({

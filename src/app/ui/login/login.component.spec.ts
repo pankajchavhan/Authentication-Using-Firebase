@@ -4,21 +4,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppRoutingModule } from '../app-routing.module';
-import { RoutePaths } from '../enums/route-paths';
-import { SharedModule } from '../shared/shared.module';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { RoutePaths } from 'src/app/core/enums/route-paths';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { LoginComponent } from './login.component';
-import { AuthService } from '../services/auth/auth.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { BehaviorSubject, of, throwError } from 'rxjs';
-import { mockSignInSuccessResponse } from '../mock-api-response/SignInApiSuccessresponse.mock';
-import { HttpErrorResponse } from '@angular/common/http';
-import { SignInErrorConstants } from '../constants/signIn-error.constants';
+import { mockSignInSuccessResponse } from 'src/app/mock-api-response/SignInApiSuccessresponse.mock';
+import { SignInErrorConstants } from 'src/app/core/constants/signIn-error.constants';
 import {
   mockSignInApiErrorResponse,
   mockSignInApiErrorResponse1,
   mockSignInApiErrorResponse2,
-} from '../mock-api-response/SignInApiErrorResponse.mock';
-import { resetPasswordErrorConstants } from '../constants/reset-password.constants';
+} from 'src/app/mock-api-response/SignInApiErrorResponse.mock';
+
 
 describe('LoginComponent', () => {
   let component: LoginComponent;

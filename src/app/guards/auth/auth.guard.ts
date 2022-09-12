@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { CanLoad, Route, Router, UrlSegment, UrlTree } from '@angular/router';
+import { CanLoad, Router,UrlTree } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { AuthService } from '../services/auth/auth.service';
-import { catchError, map, skipWhile, take, tap } from 'rxjs/operators';
-import { RoutePaths } from '../enums/route-paths';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { catchError, map} from 'rxjs/operators';
+import { RoutePaths } from 'src/app/core/enums/route-paths';
 
 @Injectable({
   providedIn: 'root'

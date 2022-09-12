@@ -1,4 +1,4 @@
-import { SignInResponse } from "../interface/auth.model"
+import { SignInResponse } from "src/app/core/interface/auth.model"
 
 
 export function mockSignInSuccessResponse():SignInResponse{

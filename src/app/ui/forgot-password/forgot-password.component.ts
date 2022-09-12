@@ -2,10 +2,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { resetPasswordErrorConstants } from '../constants/reset-password.constants';
-import { RoutePaths } from '../enums/route-paths';
-import { ResetPasswordRequest, ResetPasswordResponse } from '../interface/auth.model';
-import { AuthService } from '../services/auth/auth.service';
+import { resetPasswordErrorConstants } from 'src/app/core/constants/reset-password.constants';
+import { RoutePaths } from 'src/app/core/enums/route-paths';
+import { ResetPasswordRequest } from 'src/app/core/interface/auth.model';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-forgot-password',

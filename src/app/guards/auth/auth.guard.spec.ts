@@ -1,13 +1,11 @@
-import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { AuthService } from '../services/auth/auth.service';
-import { BehaviorSubject, of, throwError } from 'rxjs';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { of, throwError } from 'rxjs';
 import { AuthGuard } from './auth.guard';
 import { Router } from '@angular/router';
-import { RoutePaths } from '../enums/route-paths';
-import { mockSignInApiErrorResponse } from '../mock-api-response/SignInApiErrorResponse.mock';
-import { mockSignInSuccessResponse } from '../mock-api-response/SignInApiSuccessresponse.mock';
+import { RoutePaths } from 'src/app/core/enums/route-paths';
+import { mockSignInSuccessResponse } from 'src/app/mock-api-response/SignInApiSuccessresponse.mock';
 
 describe('AuthGuard', () => {
   let guard: AuthGuard;
